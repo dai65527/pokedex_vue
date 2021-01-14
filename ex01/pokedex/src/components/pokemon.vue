@@ -5,7 +5,6 @@
 >
 
   <div v-show="isLoading">
-  <spinner></spinner>
   </div>
 
   <div v-show="!isLoading">
@@ -21,18 +20,17 @@
 <script lang="ts">
   import {Component, Vue, Prop, Watch} from 'vue-property-decorator';
   import axios from 'axios';
-  import Spinner from 'vue-simple-spinner';
 
-  @Component({components: {Spinner}})
+  @Component({components: {}})
   export default class Pokemon extends Vue {
 
   @Prop(String) private uri!: string;
 
   private name: string = '';
   private sprite: string = '';
-  private isInPokedexRange = true;
   private spriteUri: string = '';
   private specesUri: string = '';
+  private isInPokedexRange: boolean = true;
   private isLoading: boolean = true;
 
   private fetchPokeItem(uri: string) {
