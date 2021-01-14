@@ -4,16 +4,25 @@
   v-if="isInPokedexRange"
 >
 
+<v-col>
+  <v-card
+  shaped
+  elevation="2"
+  >
+
   <div v-show="isLoading">
   </div>
-
   <div v-show="!isLoading">
     <img
       :src=sprite
       :style="{ width: '130px'}">
+  <v-row justify="center">
     <p>{{name}}</p>
+  </v-row>
   </div>
+  </v-card>
 
+</v-col>
 </div>
 </template>
 

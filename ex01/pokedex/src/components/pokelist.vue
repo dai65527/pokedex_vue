@@ -1,14 +1,22 @@
 <template>
 <div>
-  <div>
-    <button v-on:click="onClickPrev">PREV</button>
-    <button v-on:click="onClickNext">NEXT</button>
-  </div>
+
+<v-container>
+<v-row>
+
 
   <pokemon
   v-for="(item, index) in pokemons"
   :key="index"
   :uri="item.url"></pokemon>
+
+</v-row>
+</v-container>
+
+  <v-row justify="center">
+    <v-btn v-on:click="onClickPrev">PREV</v-btn>
+    <v-btn v-on:click="onClickNext">NEXT</v-btn>
+  </v-row>
 
 </div>
 </template>
@@ -20,7 +28,7 @@
 
   @Component({components: {Pokemon}})
   export default class PokeList extends Vue {
-  private srcUri: string = 'https://pokeapi.co/api/v2/pokemon/';
+  private srcUri: string = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=24';
   private nextUri: string = '';
   private prevUri: string = '';
   private pokemons: object = {};
