@@ -1,9 +1,7 @@
 <template>
 <div>
-
 <v-container>
 <v-row>
-
 
   <pokemon
   v-for="(item, index) in pokemons"
@@ -12,11 +10,6 @@
 
 </v-row>
 </v-container>
-
-  <v-row justify="center">
-    <v-btn v-on:click="onClickPrev">PREV</v-btn>
-    <v-btn v-on:click="onClickNext">NEXT</v-btn>
-  </v-row>
 
 </div>
 </template>
@@ -28,13 +21,25 @@
 
   @Component({components: {Pokemon}})
   export default class PokeList extends Vue {
-  private srcUri: string = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=24';
+  private srcUri: string = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=36';
   private nextUri: string = '';
   private prevUri: string = '';
-  private pokemons: object = {};
+  private pokemons: Array<object> = [];
+  private isLoadiong: boolean = false;
 
   private created() {
     this.fetchPokemonList(this.srcUri);
+  }
+
+  private mounted() {
+    window.onscroll = () => {
+      if (
+        document.documentElement.scrollTop + window.innerHeight >=
+        document.documentElement.offsetHeight
+      ) {
+        this.fetchPokemonList(this.nextUri);
+      }
+    }
   }
 
   private onClickNext() {
@@ -50,11 +55,13 @@
   }
 
   private fetchPokemonList(uri: string) {
+    if (this.isLoadiong) return;
+    this.isLoadiong = true;
     axios.get(uri)
     .then((res) => {
       const tmpUrl: URL = new URL(res.data.next);
 
-      this.pokemons = res.data.results;
+      this.pokemons = this.pokemons.concat(res.data.results);
       this.prevUri = res.data.previous;
 
       if ((Number)(tmpUrl.searchParams.get('offset')) <= 898) {
@@ -62,6 +69,7 @@
       } else {
         this.nextUri = '';
       }
+      this.isLoadiong = false;
     });
   }
 }
