@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h2>Pokelist</h2>
-    <div class="d-flex align-content-start flex-wrap">
-      <PokeListItem
-        class="ma-6"
-        v-for="pokemon in pokemons"
-        :key="pokemon.id"
-        :pokemon="pokemon"
-      />
-    </div>
+    <v-container>
+      <v-row>
+        <PokeListItem
+          v-for="pokemon in pokemons"
+          :key="pokemon.id"
+          :pokemon="pokemon"
+        />
+      </v-row>
+    </v-container>
     <InfiniteLoading
       v-if="!flgErrLoading"
       ref="infiniteLoading"
