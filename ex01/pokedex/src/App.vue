@@ -1,19 +1,15 @@
 <template>
   <div id="app">
-    <v-app>
-      <Pokedex />
-    </v-app>
+    <Pokedex />
   </div>
 </template>
-
-<script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+<script>
 import Pokedex from "./components/Pokedex.vue";
 
-@Component({
+export default {
+  name: "App",
   components: {
-    Pokedex
-  }
-})
-export default class App extends Vue {}
+    Pokedex,
+  },
+};
 </script>

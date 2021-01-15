@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <v-app>
     <h1>Pokedex</h1>
     <PokeList class="mx-auto px-3 py-2" width="70%" max-width="500px" />
-  </div>
+  </v-app>
 </template>
 
 <script lang="ts">
