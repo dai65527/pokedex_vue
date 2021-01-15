@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:13:28 by dnakano           #+#    #+#             */
-/*   Updated: 2021/01/15 21:04:38 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/01/15 23:10:34 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,45 @@ export default class Pokemon {
   }
 }
 
-const fetchAPokemon = async (url: string): Promise<Pokemon> => {
+type Language =
+  | "ja-Hrkt"
+  | "ko"
+  | "zh-Hand"
+  | "fr"
+  | "de"
+  | "es"
+  | "it"
+  | "en"
+  | "ja"
+  | "zh-Hans";
+
+const getPokeName = (
+  nameInLangs: { language: { name: Language; url: string }; name: string }[],
+  langDesignation: string
+): string => {
+  const pokeNameInLang = nameInLangs.find((nameInLang) => {
+    return nameInLang.language.name === langDesignation;
+  });
+  if (pokeNameInLang === void 0) {
+    return "N/A";
+  }
+  return pokeNameInLang.name;
+};
+
+const fetchAPokemon = async (url: string, lang: Language): Promise<Pokemon> => {
   const resPokeInfo = await axios.get(url);
   const resPokeSpecies = await axios.get(resPokeInfo.data.species.url);
   return new Pokemon(
     resPokeInfo.data.id,
-    resPokeSpecies.data.names[9].name,
+    getPokeName(resPokeSpecies.data.names, lang),
     resPokeInfo.data.sprites.other["official-artwork"].front_default
   );
 };
 
 export const fetchPokemons = async (
   offset: number,
-  limit: number
+  limit: number,
+  lang: Language
 ): Promise<Pokemon[]> => {
   const resPokeList = await axios.get(
     POKEAPI_ROOT + `pokemon/?offset=${offset}&limit=${limit}`
@@ -59,7 +85,7 @@ export const fetchPokemons = async (
   const pokemons: Pokemon[] = await Promise.all(
     resPokeList.data.results.map(
       async (result: { url: string }): Promise<Pokemon> => {
-        const pokemon = await fetchAPokemon(result.url);
+        const pokemon = await fetchAPokemon(result.url, lang);
         return pokemon;
       }
     )

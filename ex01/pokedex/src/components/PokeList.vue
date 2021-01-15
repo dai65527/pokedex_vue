@@ -49,7 +49,8 @@ export default class PokeList extends Vue {
     }
     const fetchedPokemons = await fetchPokemons(
       this.numLoaded,
-      this.numToLoad
+      this.numToLoad,
+      "ja"
     ).catch((error: Error): Pokemon[] => {
       console.error(error);
       this.flgErrLoading = true;
