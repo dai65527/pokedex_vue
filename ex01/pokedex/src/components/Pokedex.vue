@@ -14,6 +14,5 @@ import PokeList from "./PokeList.vue";
     PokeList
   }
 })
-export default class Pokedex extends Vue {
-}
+export default class Pokedex extends Vue {}
 </script>

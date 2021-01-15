@@ -1,14 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pokemon.ts                                         :+:      :+:    :+:   */
+/*   Pokemon.ts                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:13:28 by dnakano           #+#    #+#             */
-/*   Updated: 2021/01/14 19:53:56 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/01/15 15:04:53 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+import axios from "axios";
+const POKEAPI_ROOT = "https://pokeapi.co/api/v2/";
 
 export default class Pokemon {
   private id_: number;
@@ -33,3 +36,29 @@ export default class Pokemon {
     return this.imageUrl_;
   }
 }
+
+const fetchAPokemon = async (url: string): Promise<Pokemon> => {
+  const resPokeInfo = await axios.get(url);
+  const resPokeSpecies = await axios.get(resPokeInfo.data.species.url);
+  return new Pokemon(
+    resPokeInfo.data.id,
+    resPokeSpecies.data.names[9].name,
+    resPokeInfo.data.sprites.other["official-artwork"].front_default
+  );
+};
+
+export const fetchPokemons = async (
+  offset: number,
+  limit: number
+): Promise<Pokemon[]> => {
+  const resPokeList = await axios.get(
+    POKEAPI_ROOT + `pokemon/?offset=${offset}&limit=${limit}`
+  );
+  const pokemons: Pokemon[] = await Promise.all(
+    resPokeList.data.results.map(async (result: { url: string }) => {
+      const pokemon = await fetchAPokemon(result.url);
+      return pokemon;
+    })
+  );
+  return pokemons;
+};
