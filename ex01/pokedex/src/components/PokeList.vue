@@ -10,13 +10,16 @@
       />
     </div>
     <InfiniteLoading
-      v-if="!flgErrLoading || !flgErrLoading"
+      v-if="!flgErrLoading"
       ref="infiniteLoading"
       spinner="spiral"
       @infinite="loadPokemons"
     >
-      <span slot="no-more">以上</span>
+      <span slot="no-more">End of list</span>
     </InfiniteLoading>
+    <div v-if="flgErrLoading">
+      <p>An error occurd on fetching.</p>
+    </div>
   </div>
 </template>
 
@@ -24,7 +27,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import InfiniteLoading from "vue-infinite-loading";
 import PokeListItem from "./PokeListItem.vue";
-import Pokemon, { fetchPokemons } from "../models/pokemon";
+import Pokemon, { POKE_MAX, fetchPokemons } from "../models/pokemon";
 
 @Component({
   components: {
@@ -39,6 +42,11 @@ export default class PokeList extends Vue {
   private flgErrLoading = false;
 
   async loadPokemons() {
+    let flgFinishLoading = false;
+    if (this.numLoaded + this.numToLoad >= POKE_MAX) {
+      this.numToLoad = POKE_MAX - this.numLoaded;
+      flgFinishLoading = true;
+    }
     const fetchedPokemons = await fetchPokemons(
       this.numLoaded,
       this.numToLoad
@@ -50,7 +58,7 @@ export default class PokeList extends Vue {
     this.numLoaded += fetchedPokemons.length;
     this.pokemons = this.pokemons.concat(fetchedPokemons);
     this.$refs.infiniteLoading.stateChanger.loaded();
-    if (fetchedPokemons.length < this.numToLoad) {
+    if (flgFinishLoading) {
       this.$refs.infiniteLoading.stateChanger.complete();
     }
   }

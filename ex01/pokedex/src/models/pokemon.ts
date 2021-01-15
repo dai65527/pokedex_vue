@@ -6,12 +6,14 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:13:28 by dnakano           #+#    #+#             */
-/*   Updated: 2021/01/15 15:04:53 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/01/15 20:40:00 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import axios from "axios";
+
 const POKEAPI_ROOT = "https://pokeapi.co/api/v2/";
+export const POKE_MAX = 898;
 
 export default class Pokemon {
   private id_: number;
