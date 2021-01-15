@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <Pokedex />
+    <v-app>
+      <Pokedex />
+    </v-app>
   </div>
 </template>
 

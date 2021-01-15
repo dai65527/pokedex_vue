@@ -1,19 +1,22 @@
 <template>
   <div>
     <h2>Pokelist</h2>
-    <PokeListItem
-      v-for="pokemon in pokemons"
-      :key="pokemon.id"
-      :pokemon="pokemon"
-    />
+    <div class="d-flex align-content-start flex-wrap">
+      <PokeListItem
+        class="ma-6"
+        v-for="pokemon in pokemons"
+        :key="pokemon.id"
+        :pokemon="pokemon"
+      />
+    </div>
     <InfiniteLoading
       v-if="!flgErrLoading || !flgErrLoading"
       ref="infiniteLoading"
       spinner="spiral"
-      @infinite="loadPokemons">
+      @infinite="loadPokemons"
+    >
       <span slot="no-more">以上</span>
     </InfiniteLoading>
-    <!-- <button @click="loadPokemons">More</button> -->
   </div>
 </template>
 

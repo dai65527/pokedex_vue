@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <h3>{{ pokemon.id + ": " + pokemon.name }}</h3>
-    <img width="200" :src="pokemon.imageUrl" :alt="pokemon.name" />
-  </div>
+  <v-card class="mx-auto" width="170">
+    <v-img :src="pokemon.imageUrl" :alt="pokemon.name" />
+    <v-card-title class="font-weight-black text-body-1">{{
+      pokemon.id + ": " + pokemon.name
+    }}</v-card-title>
+  </v-card>
 </template>
 
 <script lang="ts">
