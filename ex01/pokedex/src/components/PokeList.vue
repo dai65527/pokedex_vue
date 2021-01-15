@@ -32,8 +32,8 @@ import Pokemon, { POKE_MAX, fetchPokemons } from "../models/pokemon";
 @Component({
   components: {
     PokeListItem,
-    InfiniteLoading,
-  },
+    InfiniteLoading
+  }
 })
 export default class PokeList extends Vue {
   private pokemons: Pokemon[] = [];
@@ -50,7 +50,7 @@ export default class PokeList extends Vue {
     const fetchedPokemons = await fetchPokemons(
       this.numLoaded,
       this.numToLoad
-    ).catch((error): Pokemon[] => {
+    ).catch((error: Error): Pokemon[] => {
       console.error(error);
       this.flgErrLoading = true;
       return [];

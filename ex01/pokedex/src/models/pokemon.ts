@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:13:28 by dnakano           #+#    #+#             */
-/*   Updated: 2021/01/15 20:40:00 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/01/15 21:04:38 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ export const POKE_MAX = 898;
 
 export default class Pokemon {
   private id_: number;
-  name_: string;
-  imageUrl_: string;
+  private name_: string;
+  private imageUrl_: string;
 
   constructor(id: number, name: string, imageUrl: string) {
     this.id_ = id;
@@ -57,10 +57,12 @@ export const fetchPokemons = async (
     POKEAPI_ROOT + `pokemon/?offset=${offset}&limit=${limit}`
   );
   const pokemons: Pokemon[] = await Promise.all(
-    resPokeList.data.results.map(async (result: { url: string }) => {
-      const pokemon = await fetchAPokemon(result.url);
-      return pokemon;
-    })
+    resPokeList.data.results.map(
+      async (result: { url: string }): Promise<Pokemon> => {
+        const pokemon = await fetchAPokemon(result.url);
+        return pokemon;
+      }
+    )
   );
   return pokemons;
 };
