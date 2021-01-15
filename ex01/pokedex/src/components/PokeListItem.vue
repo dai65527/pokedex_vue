@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import Pokemon from "../models/Pokemon";
+import Pokemon from "../models/pokemon";
 
 @Component({})
 export default class PokeList extends Vue {

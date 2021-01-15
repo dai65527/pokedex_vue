@@ -24,7 +24,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import InfiniteLoading from "vue-infinite-loading";
 import PokeListItem from "./PokeListItem.vue";
-import Pokemon, { fetchPokemons } from "../models/Pokemon";
+import Pokemon, { fetchPokemons } from "../models/pokemon";
 
 @Component({
   components: {
