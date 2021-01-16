@@ -1,6 +1,8 @@
 <template>
   <v-app>
-    <v-app-bar app color="red" dark>Pokedex</v-app-bar>
+    <v-app-bar app color="red" dark
+      ><div><v-img :src="require('@/assets/pokedex_logo.png')"></v-img></div
+    ></v-app-bar>
     <v-main>
       <PokeList class="mx-auto px-3 py-2" width="70%" max-width="500px" />
     </v-main>
