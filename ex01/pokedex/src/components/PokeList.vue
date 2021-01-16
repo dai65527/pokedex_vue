@@ -18,7 +18,7 @@
       <span slot="no-more">End of list</span>
     </InfiniteLoading>
     <div v-if="flgErrLoading">
-      <p>An error occurd on fetching.</p>
+      <p>{{ axiosErrorMessage }}</p>
     </div>
   </div>
 </template>
@@ -40,6 +40,7 @@ export default class PokeList extends Vue {
   private numLoaded = 0;
   private numToLoad = 36;
   private flgErrLoading = false;
+  private axiosErrorMessage = "";
 
   async loadPokemons() {
     let flgFinishLoading = false;
@@ -52,7 +53,7 @@ export default class PokeList extends Vue {
       this.numToLoad,
       "ja"
     ).catch((error: Error): Pokemon[] => {
-      console.error(error);
+      this.axiosErrorMessage = error.message;
       this.flgErrLoading = true;
       return [];
     });
