@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h2>Pokelist</h2>
-    <div class="d-flex align-content-start flex-wrap">
-      <PokeListItem
-        class="ma-6"
-        v-for="pokemon in pokemons"
-        :key="pokemon.id"
-        :pokemon="pokemon"
-      />
-    </div>
+    <v-container>
+      <v-row>
+        <PokeListItem
+          v-for="pokemon in pokemons"
+          :key="pokemon.id"
+          :pokemon="pokemon"
+        />
+      </v-row>
+    </v-container>
     <InfiniteLoading
       v-if="!flgErrLoading"
       ref="infiniteLoading"
@@ -32,13 +32,13 @@ import Pokemon, { POKE_MAX, fetchPokemons } from "../models/pokemon";
 @Component({
   components: {
     PokeListItem,
-    InfiniteLoading
-  }
+    InfiniteLoading,
+  },
 })
 export default class PokeList extends Vue {
   private pokemons: Pokemon[] = [];
   private numLoaded = 0;
-  private numToLoad = 20;
+  private numToLoad = 36;
   private flgErrLoading = false;
 
   async loadPokemons() {
