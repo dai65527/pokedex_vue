@@ -32,8 +32,8 @@ import Pokemon, { POKE_MAX, fetchPokemons } from "../models/pokemon";
 @Component({
   components: {
     PokeListItem,
-    InfiniteLoading
-  }
+    InfiniteLoading,
+  },
 })
 export default class PokeList extends Vue {
   private pokemons: Pokemon[] = [];
