@@ -1,9 +1,13 @@
 <template>
-  <v-col>
-    <v-card class="mx-auto" width="170">
-      <v-img :src="pokemon.imageUrl" :alt="pokemon.name" />
+  <v-col cols=4 md=3 lg=2>
+    
+    <v-card  class="mx-auto">
+      <v-img :src="require('@/assets/pokeball_bg.png')" :alt="pokemon.name">
+      <v-img :src="pokemon.imageUrl" :alt="pokemon.name">
+      </v-img>
+      </v-img>
       <v-card-title class="font-weight-black text-body-1">{{
-      pokemon.id + ": " + pokemon.name
+      "No." + pokemon.id + ": " + pokemon.name
       }}</v-card-title>
     </v-card>
   </v-col>

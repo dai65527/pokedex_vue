@@ -38,7 +38,7 @@ import Pokemon, { POKE_MAX, fetchPokemons } from "../models/pokemon";
 export default class PokeList extends Vue {
   private pokemons: Pokemon[] = [];
   private numLoaded = 0;
-  private numToLoad = 20;
+  private numToLoad = 36;
   private flgErrLoading = false;
 
   async loadPokemons() {
