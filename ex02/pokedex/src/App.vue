@@ -1,11 +1,7 @@
 <template>
   <div id="app">
     <v-app>
-      <!-- navbar is to be componented -->
-      <v-app-bar app color="red" dark
-        ><div><v-img :src="require('@/assets/pokedex_logo.png')"></v-img></div
-      ></v-app-bar>
-      <!-- navbar is to be componented -->
+      <NavBar />
       <v-main>
         <router-view />
       </v-main>
@@ -13,7 +9,12 @@
   </div>
 </template>
 <script>
+import NavBar from "./components/NavBar.vue";
+
 export default {
-  name: "App"
+  name: "App",
+  components: {
+    NavBar
+  }
 };
 </script>
