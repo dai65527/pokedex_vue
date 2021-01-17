@@ -1,8 +1,13 @@
 <template>
   <div>
-    <h1>Pokemon</h1>
-    <h2>id: {{ id }}</h2>
-    <h3>{{ pokeInfo }}</h3>
+    <div v-if="flgFetched">
+      <h1>{{ `No.${id} ${pokeInfo.name}` }}</h1>
+      <v-img :src="require('@/assets/pokeball_bg.png')" :alt="pokeInfo.name">
+        <v-img :src="pokeInfo.imageUrl" :alt="pokeInfo.name"> </v-img>
+      </v-img>
+      <p>{{ pokeInfo }}</p>
+    </div>
+    <p v-if="!flgFetched">{{ messageNotLoaded }}</p>
   </div>
 </template>
 
@@ -14,15 +19,19 @@ import PokeInfo, { fetchPokeInfoById, emptyPokeInfo } from "@/models/pokeInfo";
 export default class Pokedex extends Vue {
   private id: number = parseInt(this.$route.params.id);
   private pokeInfo: PokeInfo = emptyPokeInfo;
+  private flgFetched = false;
+  private messageNotLoaded = "Loading...";
 
   async mounted() {
     this.pokeInfo = await fetchPokeInfoById(this.id, "ja-Hrkt").catch(
       (error: Error) => {
-        console.log("hoge");
-        console.error(error);
+        this.messageNotLoaded = error.message;
         return emptyPokeInfo;
       }
     );
+    if (this.pokeInfo !== emptyPokeInfo) {
+      this.flgFetched = true;
+    }
   }
 }
 </script>
