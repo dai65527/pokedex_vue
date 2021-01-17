@@ -1,15 +1,19 @@
 <template>
   <div id="app">
-    <Pokedex />
+    <v-app>
+      <!-- navbar is to be componented -->
+      <v-app-bar app color="red" dark
+        ><div><v-img :src="require('@/assets/pokedex_logo.png')"></v-img></div
+      ></v-app-bar>
+      <!-- navbar is to be componented -->
+      <v-main>
+        <router-view />
+      </v-main>
+    </v-app>
   </div>
 </template>
 <script>
-import Pokedex from "./components/Pokedex.vue";
-
 export default {
-  name: "App",
-  components: {
-    Pokedex,
-  },
+  name: "App"
 };
 </script>
