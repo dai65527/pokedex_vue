@@ -7,15 +7,20 @@
       </v-img>
       <p>{{ pokeInfo }}</p>
     </div>
-    <p v-if="!flgFetched">{{ messageNotLoaded }}</p>
+    <poke-ball-spinner v-if="!flgFetched"></poke-ball-spinner>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import PokeInfo, { fetchPokeInfoById, emptyPokeInfo } from "@/models/pokeInfo";
+import PokeBallSpinner from './PokeBallSpinner';
 
-@Component({})
+@Component({
+  components: {
+    PokeBallSpinner
+  },
+})
 export default class Pokedex extends Vue {
   private id: number = parseInt(this.$route.params.id);
   private pokeInfo: PokeInfo = emptyPokeInfo;
