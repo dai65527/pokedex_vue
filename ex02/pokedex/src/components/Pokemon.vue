@@ -27,7 +27,7 @@
             </v-row>
             <v-row>
               <v-col class="my-10 mx-auto" cols="10">
-                <v-card class="grey lighten-5" elevation="4">
+                <v-card shaped class="grey lighten-5" elevation="4">
                   <poke-info-text
                     :row="this.rows[0]"
                     :column="`たねポケモン`"
