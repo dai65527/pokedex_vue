@@ -34,26 +34,27 @@
                   />
                   <poke-info-text
                     :row="this.rows[1]"
-                    :column="`${pokeInfo.height}m`"
+                    :column="`${pokeInfo.height.toFixed(1)}m`"
                   />
                   <poke-info-text
                     :row="this.rows[2]"
-                    :column="`${pokeInfo.weight}kg`"
+                    :column="`${pokeInfo.weight.toFixed(1)}kg`"
                   />
                   <poke-info-text
-                  v-if="pokeInfo.types.length == 2"
+                    v-if="pokeInfo.types.length == 2"
                     :row="this.rows[3]"
-                    :column="`${pokeInfo.types[0].name} ${pokeInfo.types[1].name}`"
+                    :column="
+                      `${pokeInfo.types[0].name} ${pokeInfo.types[1].name}`
+                    "
                   />
                   <poke-info-text
-                  v-if="pokeInfo.types.length == 1"
+                    v-if="pokeInfo.types.length == 1"
                     :row="this.rows[3]"
                     :column="`${pokeInfo.types[0].name}`"
                   />
                 </v-card>
               </v-col>
             </v-row>
-
             <v-row>
               <v-col>
                 <v-card shaped class="grey lighten-5" elevation="4">

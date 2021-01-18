@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pokeInfo.ts                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 22:21:35 by dnakano           #+#    #+#             */
-/*   Updated: 2021/01/17 13:14:55 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/01/18 13:40:52 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ export const fetchPokeInfoById = async (
       findNameInLang(resPokeSpecies.data.names, lang),
       resPokeInfo.data.sprites.other["official-artwork"].front_default
     ),
-    resPokeInfo.data.weight,
-    resPokeInfo.data.height,
+    resPokeInfo.data.weight / 10,
+    resPokeInfo.data.height / 10,
     pokeTypes,
     getPokeStats(resPokeInfo.data.stats)
   );

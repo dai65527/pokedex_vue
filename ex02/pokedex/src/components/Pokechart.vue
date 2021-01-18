@@ -10,11 +10,11 @@ export default class PokeChart extends Mixins(Radar, mixins.reactiveProp) {
   private pokeStats!: PokeStats;
 
   private chartData: Chart.ChartData = {
-    labels: ["HP", "こうげき", "ぼうぎょ", "すばやさ", "とくぼう", "とっこう"],
+    labels: ["HP", "こうげき", "ぼうぎょ", "すばやさ", "とくぼう", "とくこう"],
     datasets: [
       {
         label: "",
-        backgroundColor: "rgba(96,144,239,1)",
+        backgroundColor: "rgba(96,144,239,0.3)",
         borderColor: "#6090EF",
         data: [
           this.pokeStats.hp,
