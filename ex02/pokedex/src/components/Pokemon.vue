@@ -55,17 +55,7 @@
                 </v-card>
               </v-col>
             </v-row>
-            <v-row>
-              <v-col>
-                <v-card shaped class="grey lighten-5" elevation="4">
-                  <v-card-text
-                    class="font-weight-bold display-1 text-center mb-n10"
-                    >ステータス</v-card-text
-                  >
-                  <pokechart :pokeStats="pokeInfo.stats"></pokechart>
-                </v-card>
-              </v-col>
-            </v-row>
+            <poke-chart :pokeStats="pokeInfo.stats"></poke-chart>
           </v-col>
         </v-row>
       </v-container>
@@ -78,14 +68,14 @@
 import { Component, Vue } from "vue-property-decorator";
 import PokeInfo, { fetchPokeInfoById, emptyPokeInfo } from "@/models/pokeInfo";
 import PokeBallSpinner from "@/components/PokeBallSpinner.vue";
-import Pokechart from "@/components/Pokechart.vue";
 import PokeInfoText from "@/components/PokeInfoText.vue";
+import PokeChart from "@/components/PokeChart.vue";
 
 @Component({
   components: {
     PokeBallSpinner,
-    Pokechart,
     PokeInfoText,
+    PokeChart,
   },
 })
 export default class Pokedex extends Vue {

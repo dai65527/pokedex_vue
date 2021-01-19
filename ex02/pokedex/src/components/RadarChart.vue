@@ -5,7 +5,7 @@ import { Radar, mixins } from "vue-chartjs";
 import PokeStats from "@/models/pokeStats";
 
 @Component({})
-export default class PokeChart extends Mixins(Radar, mixins.reactiveProp) {
+export default class RadarChart extends Mixins(Radar, mixins.reactiveProp) {
   @Prop()
   private pokeStats!: PokeStats;
 
