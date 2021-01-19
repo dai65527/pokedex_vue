@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 22:21:35 by dnakano           #+#    #+#             */
-/*   Updated: 2021/01/17 13:14:55 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/01/19 11:58:54 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@ import axios from "axios";
 import Pokemon, { POKEAPI_ROOT } from "./pokemon";
 import PokeStats, { getPokeStats } from "./pokeStats";
 import PokeType, { fetchPokeTypes } from "./pokeType";
-import { findNameInLang, Language } from "./language";
+import { findNameInLang, findGenusInLang, Language } from "./language";
 
 export default class PokeInfo extends Pokemon {
   constructor(
     pokemon: Pokemon,
     public readonly weight: number,
     public readonly height: number,
+    public readonly genus: string,
     public readonly types: PokeType[],
     public readonly stats: PokeStats
   ) {
@@ -32,6 +33,7 @@ export const emptyPokeInfo = new PokeInfo(
   new Pokemon(0, "", ""),
   0,
   0,
+  "",
   [],
   new PokeStats(0, 0, 0, 0, 0, 0, 0, 0)
 );
@@ -53,6 +55,7 @@ export const fetchPokeInfoById = async (
     ),
     resPokeInfo.data.weight,
     resPokeInfo.data.height,
+    findGenusInLang(resPokeSpecies.data.genera, lang),
     pokeTypes,
     getPokeStats(resPokeInfo.data.stats)
   );
