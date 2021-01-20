@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="12" xs="6" sm="4" md="3" xl="2">
+  <v-col cols="6" sm="4" md="3" xl="2">
       <v-card 
       hover
       :ripple="false"

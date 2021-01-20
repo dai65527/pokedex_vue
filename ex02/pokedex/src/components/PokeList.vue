@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-container>
+  <div class="main mx-auto"> 
+    <v-container fluid>
       <v-row>
         <PokeListItem
           v-for="pokemon in pokemons"
@@ -66,3 +66,10 @@ export default class PokeList extends Vue {
   }
 }
 </script>
+
+<style>
+.main {
+  max-width: 1300px;
+  width: 100%;
+}
+</style>

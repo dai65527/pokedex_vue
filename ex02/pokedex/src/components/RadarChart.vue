@@ -33,14 +33,13 @@ export default class RadarChart extends Mixins(Radar, mixins.reactiveProp) {
     layout:{ padding: 30 },
     scale: {
       pointLabels: {
-        fontSize: 25,
+        fontSize: 12,
         fontFamily: "Arial",
       },
       ticks: {
         suggestedMin: 0,
         suggestedMax: 70,
-        fontSize: 20,
-        fontStyle: 'bold',
+        fontSize: 10,
         backdropColor: "rgba(255,255,255,0)"
       },
     },

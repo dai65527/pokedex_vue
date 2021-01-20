@@ -1,12 +1,15 @@
 <template>
   <v-row>
-    <v-col>
+    <v-spacer/>
+    <v-col cols="10">
       <v-card shaped class="grey lighten-5" elevation="4">
-        <v-card-text class="font-weight-bold display-1 text-center mb-n10"
-          >ステータス</v-card-text>
+        <p class="font-weight-bold text-center grey--text text--darken-2"
+          >ステータス</p>
           <radar-chart :pokeStats="this.pokeStats"></radar-chart>
       </v-card>
     </v-col>
+    <v-spacer/>
+
   </v-row>
 </template>
 

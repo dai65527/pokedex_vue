@@ -1,16 +1,17 @@
 <template>
   <div>
     <div class="bg" v-if="flgFetched">
+      <div class="main mx-auto">
       <v-container>
         <v-row justify="center" align-content="center">
-          <v-col cols="12" lg="6" class="my-auto">
+          <v-col cols="12" sm="6" class="my-auto">
             <v-row justify="center" align-content="center" no-gutters>
               <v-col cols="10">
                 <v-img :src="pokeInfo.imageUrl" :alt="pokeInfo.name" />
               </v-col>
             </v-row>
           </v-col>
-          <v-col cols="12" lg="6">
+          <v-col cols="12" sm="6">
             <v-row>
               <v-col>
                 <v-card
@@ -19,14 +20,14 @@
                   elevation="4"
                   max-height="100px"
                 >
-                  <v-card-text class="font-weight-bold text-center display-3">{{
+                  <v-card-text class="font-weight-bold text-center display-1">{{
                     `${pokeInfo.name}`
                   }}</v-card-text>
                 </v-card>
               </v-col>
             </v-row>
             <v-row>
-              <v-col class="my-10 mx-auto" cols="10">
+              <v-col class="ma-auto mx-auto" cols="10">
                 <v-card shaped class="grey lighten-5" elevation="4">
                   <poke-info-text
                     :row="this.rows[0]"
@@ -59,6 +60,7 @@
           </v-col>
         </v-row>
       </v-container>
+      </div>
     </div>
     <poke-ball-spinner v-if="!flgFetched"></poke-ball-spinner>
   </div>
@@ -103,5 +105,10 @@ export default class Pokedex extends Vue {
 .bg {
   background-image: url("~@/assets/pokebg.png");
   background-size: cover;
+}
+
+.main{
+  max-width: 1300px;
+  width: 100%;
 }
 </style>

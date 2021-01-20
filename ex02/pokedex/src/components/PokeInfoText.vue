@@ -1,11 +1,11 @@
 <template>
-  <v-row>
+  <v-row class="ma-auto">
     <v-spacer />
-    <v-col cols="5">
-      <v-card-text class="font-weight-bold display-1">{{ this.row }}:</v-card-text>
+    <v-col cols="4" >
+      <span class="text-center font-weight-bold grey--text text--darken-2">{{ this.row }}:</span>
     </v-col>
-    <v-col cols="5">
-      <v-card-text class="font-weight-bold display-1">{{ this.column }}</v-card-text>
+    <v-col cols="6" >
+      <span class="text-center font-weight-bold grey--text text--darken-2">{{ this.column }}</span>
     </v-col>
     <v-spacer />
   </v-row>
