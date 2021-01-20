@@ -14,7 +14,7 @@
       <v-row>
         <v-col cols="12" >
           <p class="mx-auto grey--text text--lighten-1 display-1 text text-center">
-          Loading...
+            {{infoText}}
           </p>
         </v-col>
       </v-row>
@@ -23,10 +23,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component({})
-export default class PokeBallSpinner extends Vue {}
+export default class PokeBallSpinner extends Vue {
+  @Prop()
+  private infoText!: string;
+}
 </script>
 
 <style module>

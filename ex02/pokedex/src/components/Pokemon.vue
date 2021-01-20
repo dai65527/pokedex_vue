@@ -33,7 +33,7 @@
       </v-container>
       </div>
     </div>
-    <poke-ball-spinner v-if="!flgFetched"></poke-ball-spinner>
+    <poke-ball-spinner v-if="!flgFetched" :infoText="messageNotLoaded"></poke-ball-spinner>
   </div>
 </template>
 
