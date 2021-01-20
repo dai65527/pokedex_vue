@@ -2,64 +2,36 @@
   <div>
     <div class="bg" v-if="flgFetched">
       <div class="main mx-auto">
-      <v-container>
-        <v-row justify="center" align-content="center">
-          <v-col cols="12" sm="6" class="my-auto">
-            <v-row justify="center" align-content="center" no-gutters>
-              <v-col cols="10">
-                <v-img :src="pokeInfo.imageUrl" :alt="pokeInfo.name" />
-              </v-col>
-            </v-row>
-          </v-col>
-          <v-col cols="12" sm="6">
-            <v-row>
-              <v-col>
-                <v-card
-                  shaped
-                  class="grey lighten-5"
-                  elevation="4"
-                  max-height="100px"
-                >
-                  <v-card-text class="font-weight-bold text-center display-1">{{
-                    `${pokeInfo.name}`
-                  }}</v-card-text>
-                </v-card>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col class="ma-auto mx-auto" cols="10">
-                <v-card shaped class="grey lighten-5" elevation="4">
-                  <poke-info-text
-                    :row="this.rows[0]"
-                    :column="`たねポケモン`"
-                  />
-                  <poke-info-text
-                    :row="this.rows[1]"
-                    :column="`${pokeInfo.height.toFixed(1)}m`"
-                  />
-                  <poke-info-text
-                    :row="this.rows[2]"
-                    :column="`${pokeInfo.weight.toFixed(1)}kg`"
-                  />
-                  <poke-info-text
-                    v-if="pokeInfo.types.length == 2"
-                    :row="this.rows[3]"
-                    :column="
-                      `${pokeInfo.types[0].name} ${pokeInfo.types[1].name}`
-                    "
-                  />
-                  <poke-info-text
-                    v-if="pokeInfo.types.length == 1"
-                    :row="this.rows[3]"
-                    :column="`${pokeInfo.types[0].name}`"
-                  />
-                </v-card>
-              </v-col>
-            </v-row>
-            <poke-chart :pokeStats="pokeInfo.stats"></poke-chart>
-          </v-col>
-        </v-row>
-      </v-container>
+        <v-container>
+          <v-row justify="center" align-content="center">
+            <v-col cols="12" sm="6" class="my-auto">
+              <v-row justify="center" align-content="center" no-gutters>
+                <v-col cols="10">
+                  <v-img :src="pokeInfo.imageUrl" :alt="pokeInfo.name" />
+                </v-col>
+              </v-row>
+            </v-col>
+            <v-col cols="12" sm="6">
+              <v-row>
+                <v-col>
+                  <v-card
+                    shaped
+                    class="grey lighten-5"
+                    elevation="4"
+                    max-height="100px"
+                  >
+                    <v-card-text
+                      class="font-weight-bold text-center display-1"
+                      >{{ `${pokeInfo.name}` }}</v-card-text
+                    >
+                  </v-card>
+                </v-col>
+              </v-row>
+              <poke-info-card :pokeInfo="pokeInfo" />
+              <poke-chart :pokeStats="pokeInfo.stats"></poke-chart>
+            </v-col>
+          </v-row>
+        </v-container>
       </div>
     </div>
     <poke-ball-spinner v-if="!flgFetched"></poke-ball-spinner>
@@ -72,12 +44,14 @@ import PokeInfo, { fetchPokeInfoById, emptyPokeInfo } from "@/models/pokeInfo";
 import PokeBallSpinner from "@/components/PokeBallSpinner.vue";
 import PokeInfoText from "@/components/PokeInfoText.vue";
 import PokeChart from "@/components/PokeChart.vue";
+import PokeInfoCard from "@/components/PokeInfoCard.vue";
 
 @Component({
   components: {
     PokeBallSpinner,
     PokeInfoText,
     PokeChart,
+    PokeInfoCard,
   },
 })
 export default class Pokedex extends Vue {
@@ -107,7 +81,7 @@ export default class Pokedex extends Vue {
   background-size: cover;
 }
 
-.main{
+.main {
   max-width: 1300px;
   width: 100%;
 }
