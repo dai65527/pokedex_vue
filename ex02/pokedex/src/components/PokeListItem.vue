@@ -8,9 +8,11 @@
         <v-img :src="require('@/assets/pokeball_bg.png')" :alt="pokemon.name">
           <v-img :src="pokemon.imageUrl" :alt="pokemon.name"> </v-img>
         </v-img>
-        <v-card-title class="font-weight-black text-body-1">{{
+        <p class="font-weight-black body-1 py-3 mx-3">
+          {{
           "No." + pokemon.id + ": " + pokemon.name
-        }}</v-card-title>
+        }}
+        </p>
       </v-card>
   </v-col>
 </template>
