@@ -32,11 +32,11 @@ export default class PokeInfoCard extends Vue {
     this.informations.push({ title: "分類", value: `${this.pokeInfo.genus}` });
     this.informations.push({
       title: "たかさ",
-      value: `${this.pokeInfo.height}m`,
+      value: `${this.pokeInfo.height.toFixed(1)}m`,
     });
     this.informations.push({
       title: "おもさ",
-      value: `${this.pokeInfo.weight}kg`,
+      value: `${this.pokeInfo.weight.toFixed(1)}kg`,
     });
     if (this.pokeInfo.types.length == 2)
       this.informations.push({
