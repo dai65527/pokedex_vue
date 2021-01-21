@@ -30,7 +30,7 @@ export default class RadarChart extends Mixins(Radar, mixins.reactiveProp) {
 
   private chartOptions: Chart.ChartOptions = {
     legend: { display: false },
-    layout:{ padding: 30 },
+    layout: { padding: 30 },
     scale: {
       pointLabels: {
         fontSize: 12,
@@ -40,7 +40,7 @@ export default class RadarChart extends Mixins(Radar, mixins.reactiveProp) {
         suggestedMin: 0,
         suggestedMax: 70,
         fontSize: 10,
-        backdropColor: "rgba(255,255,255,0)"
+        backdropColor: "rgba(255,255,255,0)",
       },
     },
   };

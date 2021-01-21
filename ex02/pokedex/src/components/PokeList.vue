@@ -1,5 +1,5 @@
 <template>
-  <div class="main mx-auto"> 
+  <div class="main mx-auto">
     <v-container fluid>
       <v-row>
         <PokeListItem

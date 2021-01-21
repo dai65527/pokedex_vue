@@ -1,5 +1,5 @@
 <template>
-  <PokeList/>
+  <PokeList />
 </template>
 
 <script lang="ts">
@@ -8,8 +8,8 @@ import PokeList from "./PokeList.vue";
 
 @Component({
   components: {
-    PokeList
-  }
+    PokeList,
+  },
 })
 export default class Pokedex extends Vue {}
 </script>
