@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto" max-widtg="1300px" width="100%">
+  <div class="mx-auto" :style="{ 'max-width': '1300px', width: '100%' }">
     <v-container fluid>
       <v-row>
         <PokeListItem

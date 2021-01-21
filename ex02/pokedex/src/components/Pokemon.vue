@@ -1,7 +1,13 @@
 <template>
   <div>
-    <div class="bg" height="100vh" v-if="flgFetched">
-      <div class="mx-auto" max-width="1300px" width="100%">
+    <div
+      :style="{
+        'background-image': 'url(/pokebg.png)',
+        height: '95vh',
+      }"
+      v-if="flgFetched"
+    >
+      <div class="mx-auto" :style="{ 'max-width': '1300px', width: '100%' }">
         <v-container>
           <v-row justify="center" align-content="center">
             <v-col cols="12" sm="6" class="my-auto">
@@ -46,14 +52,12 @@
 import { Component, Vue } from "vue-property-decorator";
 import PokeInfo, { fetchPokeInfoById, emptyPokeInfo } from "@/models/pokeInfo";
 import PokeBallSpinner from "@/components/PokeBallSpinner.vue";
-import PokeInfoText from "@/components/PokeInfoText.vue";
 import PokeChart from "@/components/PokeChart.vue";
 import PokeInfoCard from "@/components/PokeInfoCard.vue";
 
 @Component({
   components: {
     PokeBallSpinner,
-    PokeInfoText,
     PokeChart,
     PokeInfoCard,
   },
@@ -80,9 +84,3 @@ export default class Pokedex extends Vue {
   }
 }
 </script>
-
-<style scoped>
-.bg {
-  background-image: url("~@/assets/pokebg.png");
-}
-</style>
