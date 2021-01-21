@@ -1,5 +1,5 @@
 <template>
-  <div class="main mx-auto">
+  <div class="mx-auto" max-widtg="1300px" width="100%">
     <v-container fluid>
       <v-row>
         <PokeListItem
@@ -66,10 +66,3 @@ export default class PokeList extends Vue {
   }
 }
 </script>
-
-<style>
-.main {
-  max-width: 1300px;
-  width: 100%;
-}
-</style>

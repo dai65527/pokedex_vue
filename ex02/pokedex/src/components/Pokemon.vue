@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="bg" v-if="flgFetched">
-      <div class="main mx-auto">
+    <div class="bg" height="100vh" v-if="flgFetched">
+      <div class="mx-auto" max-width="1300px" width="100%">
         <v-container>
           <v-row justify="center" align-content="center">
             <v-col cols="12" sm="6" class="my-auto">
@@ -81,14 +81,8 @@ export default class Pokedex extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .bg {
   background-image: url("~@/assets/pokebg.png");
-  height: 100vh;
-}
-
-.main {
-  max-width: 1300px;
-  width: 100%;
 }
 </style>
