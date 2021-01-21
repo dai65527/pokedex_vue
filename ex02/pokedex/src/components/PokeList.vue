@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-container>
+  <div class="mx-auto" :style="{ 'max-width': '1300px', width: '100%' }">
+    <v-container fluid>
       <v-row>
         <PokeListItem
           v-for="pokemon in pokemons"
