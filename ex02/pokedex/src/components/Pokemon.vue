@@ -33,7 +33,7 @@
       </v-container>
       </div>
     </div>
-    <poke-ball-spinner v-if="!flgFetched" :infoText="messageNotLoaded"></poke-ball-spinner>
+    <poke-ball-spinner v-if="!flgFetched" :infoText="messageNotLoaded" :isLoading="flgLoading"></poke-ball-spinner>
   </div>
 </template>
 
@@ -57,6 +57,7 @@ export default class Pokedex extends Vue {
   private id: number = parseInt(this.$route.params.id);
   private pokeInfo: PokeInfo = emptyPokeInfo;
   private flgFetched = false;
+  private flgLoading = true;
   private messageNotLoaded = "Loading...";
   private rows: string[] = ["分類", "たかさ", "おもさ", "タイプ"];
 
@@ -64,6 +65,7 @@ export default class Pokedex extends Vue {
     this.pokeInfo = await fetchPokeInfoById(this.id, "ja-Hrkt").catch(
       (error: Error) => {
         this.messageNotLoaded = error.message;
+        this.flgLoading = false;
         return emptyPokeInfo;
       }
     );
