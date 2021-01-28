@@ -49,12 +49,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import PokeInfo, { fetchPokeInfoById, emptyPokeInfo } from "@/models/pokeInfo";
 import PokeBallSpinner from "@/components/PokeBallSpinner.vue";
 import PokeChart from "@/components/PokeChart.vue";
 import PokeInfoCard from "@/components/PokeInfoCard.vue";
-import { Language } from "@/models/language"
+import { Language } from "@/models/language";
 
 @Component({
   components: {
@@ -71,12 +71,12 @@ export default class Pokedex extends Vue {
   private messageNotLoaded = "Loading...";
   private rows: string[] = ["分類", "たかさ", "おもさ", "タイプ"];
 
-  get langage(): Language {
+  get language(): Language {
     return this.$store.state.language;
   }
 
-  async mounted() {
-    this.pokeInfo = await fetchPokeInfoById(this.id, this.langage).catch(
+  async fetch() {
+    this.pokeInfo = await fetchPokeInfoById(this.id, this.language).catch(
       (error: Error) => {
         this.messageNotLoaded = error.message;
         this.flgLoading = false;
@@ -86,6 +86,16 @@ export default class Pokedex extends Vue {
     if (this.pokeInfo !== emptyPokeInfo) {
       this.flgFetched = true;
     }
+  }
+
+  @Watch("language")
+  async reset() {
+    this.flgFetched = false;
+    await this.fetch();
+  }
+
+  async mounted() {
+    await this.fetch();
   }
 }
 </script>

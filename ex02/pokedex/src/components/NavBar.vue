@@ -57,7 +57,7 @@ export default class NavBar extends Vue {
   }
 
   changeLanguage(lang: Language) {
-    this.$store.state.language = lang;
+    this.$store.commit("changeLanguage", lang);
   }
 }
 </script>

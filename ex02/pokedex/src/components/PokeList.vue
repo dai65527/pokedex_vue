@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import InfiniteLoading from "vue-infinite-loading";
 import PokeListItem from "./PokeListItem.vue";
 import Pokemon, { POKE_MAX, fetchPokemons } from "../models/pokemon";
@@ -43,8 +43,15 @@ export default class PokeList extends Vue {
   private flgErrLoading = false;
   private axiosErrorMessage = "";
 
-  get langage(): Language {
+  get language(): Language {
     return this.$store.state.language;
+  }
+
+  @Watch("language")
+  async reset() {
+    this.pokemons = [];
+    this.numLoaded = 0;
+    await this.loadPokemons();
   }
 
   async loadPokemons() {
@@ -56,7 +63,7 @@ export default class PokeList extends Vue {
     const fetchedPokemons = await fetchPokemons(
       this.numLoaded,
       this.numToLoad,
-      this.langage
+      this.language
     ).catch((error: Error): Pokemon[] => {
       this.axiosErrorMessage = error.message;
       this.flgErrLoading = true;
