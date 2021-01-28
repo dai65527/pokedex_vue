@@ -48,10 +48,10 @@ export default class PokeList extends Vue {
   }
 
   @Watch("language")
-  async reset() {
+  reset() {
     this.pokemons = [];
     this.numLoaded = 0;
-    await this.loadPokemons();
+    this.$refs.infiniteLoading.stateChanger.reset();
   }
 
   async loadPokemons() {
