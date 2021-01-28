@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 09:06:23 by dnakano           #+#    #+#             */
-/*   Updated: 2021/01/28 11:20:38 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/01/28 14:41:59 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store<{ language: Language }>({
   state: {
-    language: "en"
+    language: "ja-Hrkt"
   }
 });
