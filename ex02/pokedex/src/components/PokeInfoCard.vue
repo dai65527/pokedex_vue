@@ -29,23 +29,26 @@ export default class PokeInfoCard extends Vue {
   private informations: { title: string; value: string | number }[] = [];
 
   created() {
-    this.informations.push({ title: "分類", value: `${this.pokeInfo.genus}` });
     this.informations.push({
-      title: "たかさ",
+      title: this.$store.state.language === "ja-Hrkt" ? "ぶんるい" : "GENUS",
+      value: `${this.pokeInfo.genus}`,
+    });
+    this.informations.push({
+      title: this.$store.state.language === "ja-Hrkt" ? "たかさ" : "HEIGHT",
       value: `${this.pokeInfo.height.toFixed(1)}m`,
     });
     this.informations.push({
-      title: "おもさ",
+      title: this.$store.state.language === "ja-Hrkt" ? "おもさ" : "WEIGHT",
       value: `${this.pokeInfo.weight.toFixed(1)}kg`,
     });
     if (this.pokeInfo.types.length == 2)
       this.informations.push({
-        title: "タイプ",
+        title: this.$store.state.language === "ja-Hrkt" ? "タイプ" : "TYPE",
         value: `${this.pokeInfo.types[0].name}/${this.pokeInfo.types[1].name}`,
       });
     else
       this.informations.push({
-        title: "タイプ",
+        title: this.$store.state.language === "ja-Hrkt" ? "タイプ" : "TYPE",
         value: `${this.pokeInfo.types[0].name}`,
       });
   }

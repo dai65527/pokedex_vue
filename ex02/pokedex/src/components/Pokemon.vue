@@ -69,7 +69,6 @@ export default class Pokedex extends Vue {
   private flgFetched = false;
   private flgLoading = true;
   private messageNotLoaded = "Loading...";
-  private rows: string[] = ["分類", "たかさ", "おもさ", "タイプ"];
 
   get language(): Language {
     return this.$store.state.language;
