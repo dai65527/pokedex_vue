@@ -17,7 +17,8 @@
     "vue-infinite-loading": "^2.4.5",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.4.9",
-    "vuetify": "^2.2.11"
+    "vuetify": "^2.2.11",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.33.0",

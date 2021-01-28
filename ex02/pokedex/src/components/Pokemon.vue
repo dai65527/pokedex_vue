@@ -54,6 +54,7 @@ import PokeInfo, { fetchPokeInfoById, emptyPokeInfo } from "@/models/pokeInfo";
 import PokeBallSpinner from "@/components/PokeBallSpinner.vue";
 import PokeChart from "@/components/PokeChart.vue";
 import PokeInfoCard from "@/components/PokeInfoCard.vue";
+import { Language } from "@/models/language"
 
 @Component({
   components: {
@@ -70,8 +71,12 @@ export default class Pokedex extends Vue {
   private messageNotLoaded = "Loading...";
   private rows: string[] = ["分類", "たかさ", "おもさ", "タイプ"];
 
+  get langage(): Language {
+    return this.$store.state.language;
+  }
+
   async mounted() {
-    this.pokeInfo = await fetchPokeInfoById(this.id, "ja-Hrkt").catch(
+    this.pokeInfo = await fetchPokeInfoById(this.id, this.langage).catch(
       (error: Error) => {
         this.messageNotLoaded = error.message;
         this.flgLoading = false;
