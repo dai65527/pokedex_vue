@@ -8,6 +8,7 @@
     </v-app>
   </div>
 </template>
+
 <script>
 import NavBar from "./components/NavBar.vue";
 

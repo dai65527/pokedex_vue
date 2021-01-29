@@ -4,7 +4,9 @@
     <v-col cols="10">
       <v-card shaped class="grey lighten-5" elevation="4">
         <p class="font-weight-bold text-center grey--text text--darken-2">
-          ステータス
+          {{
+            this.$store.state.language == "ja-Hrkt" ? "ステータス" : "STATUS"
+          }}
         </p>
         <radar-chart :pokeStats="this.pokeStats"></radar-chart>
       </v-card>

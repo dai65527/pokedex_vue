@@ -24,10 +24,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import InfiniteLoading from "vue-infinite-loading";
 import PokeListItem from "./PokeListItem.vue";
 import Pokemon, { POKE_MAX, fetchPokemons } from "../models/pokemon";
+import { Language } from "../models/language"
 
 @Component({
   components: {
@@ -42,6 +43,17 @@ export default class PokeList extends Vue {
   private flgErrLoading = false;
   private axiosErrorMessage = "";
 
+  get language(): Language {
+    return this.$store.state.language;
+  }
+
+  @Watch("language")
+  reset() {
+    this.pokemons = [];
+    this.numLoaded = 0;
+    this.$refs.infiniteLoading.stateChanger.reset();
+  }
+
   async loadPokemons() {
     let flgFinishLoading = false;
     if (this.numLoaded + this.numToLoad >= POKE_MAX) {
@@ -51,7 +63,7 @@ export default class PokeList extends Vue {
     const fetchedPokemons = await fetchPokemons(
       this.numLoaded,
       this.numToLoad,
-      "ja"
+      this.language
     ).catch((error: Error): Pokemon[] => {
       this.axiosErrorMessage = error.message;
       this.flgErrLoading = true;

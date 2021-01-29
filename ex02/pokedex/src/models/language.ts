@@ -6,21 +6,32 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 08:22:30 by dnakano           #+#    #+#             */
-/*   Updated: 2021/01/19 11:58:08 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/01/28 13:56:43 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 export type Language =
   | "ja-Hrkt"
   | "ko"
-  | "zh-Hand"
   | "fr"
   | "de"
   | "es"
   | "it"
   | "en"
-  | "ja"
   | "zh-Hans";
+
+type DisplayName = string;
+
+export const languageNameMap: ReadonlyMap<Language, DisplayName> = new Map([
+  ["ja-Hrkt", "JA"],
+  ["ko", "KO"],
+  ["fr", "FR"],
+  ["de", "DE"],
+  ["es", "ES"],
+  ["it", "IT"],
+  ["en", "EN"],
+  ["zh-Hans", "CH"]
+]);
 
 export const findNameInLang = (
   nameInLangs: { language: { name: Language }; name: string }[],
