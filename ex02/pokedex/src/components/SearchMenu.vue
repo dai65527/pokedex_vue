@@ -19,8 +19,8 @@
       <v-divider></v-divider>
       <v-card-title>Filter</v-card-title>
       <v-divider></v-divider>
-      <v-card-text style="height: 300px;">
-        <v-radio-group v-model="dialogm1" column>
+      <v-card-text v-if="!isLoading" style="height: 300px;">
+        <v-radio-group v-model="typeFilter" column>
           <v-radio
             v-for="item in pokeTypes"
             :key="item.id"
@@ -29,13 +29,24 @@
           />
         </v-radio-group>
       </v-card-text>
+      <v-card-text v-if="isLoading">{{ messageNotLoaded }}</v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
-        <v-btn color="blue darken-1" text @click="dialog = false">
-          Close
+        <v-btn
+          color="amber lighten-1"
+          class="mx-auto"
+          rounded
+          @click="dialog = false"
+        >
+          <v-icon>mdi-magnify</v-icon>
         </v-btn>
-        <v-btn color="blue darken-1" text @click="dialog = false">
-          Save
+        <v-btn
+          color="amber lighten-1"
+          class="mx-auto"
+          rounded
+          @click="typeFilter = 'None'"
+        >
+          <v-icon>mdi-refresh</v-icon>
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -49,20 +60,30 @@ import { Language } from "@/models/language";
 
 @Component({})
 export default class SearchMenu extends Vue {
-  private isPokeList: boolean = true;
+  private isPokeList = true;
   private pokeTypes: PokeType[] = [];
+  private dialog = false;
+  private typeFilter: string = "None";
+  private isLoading = true;
+  private messageNotLoaded = "Loading...";
 
   get language(): Language {
     return this.$store.state.language;
   }
 
-  async fetch() {
+  private async fetch() {
     fetchPokeTypesInLang(this.language)
-      .then((ary) => (this.pokeTypes = ary))
-      .catch();
+      .then((ary) => {
+        this.pokeTypes = ary;
+        this.isLoading = false;
+      })
+      .catch((err) => {
+        this.messageNotLoaded = err;
+      });
   }
 
-  created() {
+  async created() {
+    await this.fetch();
   }
 
   @Watch("$route")
@@ -72,10 +93,14 @@ export default class SearchMenu extends Vue {
   }
 
   @Watch("language")
-  reset() {
-    fetchPokeTypesInLang(this.language)
-      .then((ary) => (this.pokeTypes = ary))
-      .catch();
+  async reset() {
+    this.isLoading = true;
+    await this.fetch();
+  }
+
+  @Watch("typeFilter")
+  log(){
+    console.log(this.typeFilter);
   }
 }
 </script>
