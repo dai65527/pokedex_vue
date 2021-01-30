@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store.ts                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 09:06:23 by dnakano           #+#    #+#             */
-/*   Updated: 2021/01/28 15:16:04 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/01/30 16:43:05 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store<{ language: Language }>({
   state: {
-    language: "ja-Hrkt"
+    language: "ja-Hrkt",
+    
   },
   getters: {
     language: state => state.language
