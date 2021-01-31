@@ -55,6 +55,22 @@ export default class PokeList extends Vue {
     return this.$store.state.search;
   }
 
+  get fetchUrl(): string {
+    if (this.typeFilter === "None") {
+      return `pokemon/?offset=${this.numLoaded}&limit=${this.numToLoad}`;
+    } else {
+      return `type/${this.typeFilter}`;
+    }
+  }
+
+  get flgFiltered(): boolean {
+    if (this.typeFilter === "None") {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   private reset() {
     this.pokemons = [];
     this.numLoaded = 0;
@@ -66,16 +82,28 @@ export default class PokeList extends Vue {
     this.reset();
   }
 
+  @Watch("typeFilter")
+  filterReset() {
+    this.reset();
+  }
+
+  @Watch("searchString")
+  searchReset() {
+    this.reset();
+  }
   async loadPokemons() {
     let flgFinishLoading = false;
-    if (this.numLoaded + this.numToLoad >= POKE_MAX) {
+    if (!this.flgFiltered && this.numLoaded + this.numToLoad >= POKE_MAX) {
       this.numToLoad = POKE_MAX - this.numLoaded;
       flgFinishLoading = true;
     }
+    if (this.flgFiltered) {
+      flgFinishLoading = true;
+    }
     const fetchedPokemons = await fetchPokemons(
-      this.numLoaded,
-      this.numToLoad,
-      this.language
+      this.fetchUrl,
+      this.language,
+      this.flgFiltered
     ).catch((error: Error): Pokemon[] => {
       this.axiosErrorMessage = error.message;
       this.flgErrLoading = true;

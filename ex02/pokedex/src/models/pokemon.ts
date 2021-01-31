@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pokemon.ts                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:13:28 by dnakano           #+#    #+#             */
-/*   Updated: 2021/01/17 09:02:15 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/01/31 09:52:08 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,31 @@ const fetchAPokemon = async (url: string, lang: Language): Promise<Pokemon> => {
 };
 
 export const fetchPokemons = async (
-  offset: number,
-  limit: number,
-  lang: Language
+  fetchUrl: string,
+  lang: Language,
+  filtered: boolean
 ): Promise<Pokemon[]> => {
-  const resPokeList = await axios.get(
-    POKEAPI_ROOT + `pokemon/?offset=${offset}&limit=${limit}`
-  );
-  const pokemons: Pokemon[] = await Promise.all(
-    resPokeList.data.results.map(
-      async (result: { url: string }): Promise<Pokemon> => {
-        const pokemon = await fetchAPokemon(result.url, lang);
-        return pokemon;
-      }
-    )
-  );
+  const resPokeList = await axios.get(POKEAPI_ROOT + fetchUrl);
+  let pokemons: Pokemon[] = [];
+  if (!filtered) {
+    pokemons = await Promise.all(
+      resPokeList.data.results.map(
+        async (result: { url: string }): Promise<Pokemon> => {
+          const pokemon = await fetchAPokemon(result.url, lang);
+          return pokemon;
+        }
+      )
+    );
+  } else {
+    pokemons = await Promise.all(
+      resPokeList.data.pokemon.map(
+        async (result: { pokemon: { url: string } }): Promise<Pokemon> => {
+          const pokemon = await fetchAPokemon(result.pokemon.url, lang);
+          return pokemon;
+        }
+      )
+    );
+    pokemons = pokemons.filter(item => item.id < 10000);
+  }
   return pokemons;
 };
