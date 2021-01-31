@@ -17,7 +17,8 @@ export default new Router({
       component: Pokemon,
     },
     {
-      path: "*", redirect: "/"
+      path: "*",
+      redirect: "/",
     },
   ],
   mode: "history",

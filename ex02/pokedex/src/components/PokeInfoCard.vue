@@ -30,6 +30,11 @@ export default class PokeInfoCard extends Vue {
 
   created() {
     this.informations.push({
+      title:
+        this.$store.state.language === "ja-Hrkt" ? "図鑑番号" : "PokedexNo",
+      value: ("000" + this.pokeInfo.id).slice(-3),
+    });
+    this.informations.push({
       title: this.$store.state.language === "ja-Hrkt" ? "ぶんるい" : "GENUS",
       value: `${this.pokeInfo.genus}`,
     });
