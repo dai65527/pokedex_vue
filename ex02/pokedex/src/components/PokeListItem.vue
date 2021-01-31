@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="6" sm="4" md="3" xl="2">
+  <v-col cols="6" sm="4" md="3" xl="2" v-if="isSearchTarget">
     <v-card
       hover
       :ripple="false"
@@ -24,5 +24,17 @@ import Pokemon from "../models/pokemon";
 export default class PokeList extends Vue {
   @Prop()
   private pokemon!: Pokemon;
+  @Prop()
+  private searchString!: string;
+
+  get isSearchTarget(): boolean {
+    if (
+      this.searchString !== "" &&
+      this.pokemon.name.indexOf(this.searchString) === -1
+    ) {
+      return false;
+    }
+    return true;
+  }
 }
 </script>

@@ -6,6 +6,7 @@
           v-for="pokemon in pokemons"
           :key="pokemon.id"
           :pokemon="pokemon"
+          :searchString="searchString"
         />
       </v-row>
     </v-container>
