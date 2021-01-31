@@ -9,13 +9,16 @@ export default new Router({
     {
       path: "/",
       name: "pokedex",
-      component: Pokedex
+      component: Pokedex,
     },
     {
       path: "/pokemon/:id",
       name: "pokemon",
-      component: Pokemon
-    }
+      component: Pokemon,
+    },
+    {
+      path: "*", redirect: "/"
+    },
   ],
   mode: "history",
 });

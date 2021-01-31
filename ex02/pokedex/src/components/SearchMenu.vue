@@ -17,7 +17,6 @@
       <v-divider></v-divider>
       <v-text-field
         class="mx-auto"
-        clearable
         v-model="searchString"
       ></v-text-field>
       <v-divider></v-divider>
