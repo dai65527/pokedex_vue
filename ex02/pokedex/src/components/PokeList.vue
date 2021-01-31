@@ -40,7 +40,7 @@ import { Language } from "../models/language";
 export default class PokeList extends Vue {
   private pokemons: Pokemon[] = [];
   private numLoaded = 0;
-  private numToLoad = 36;
+  private numToLoad = 72;
   private flgErrLoading = false;
   private axiosErrorMessage = "";
 
@@ -56,14 +56,6 @@ export default class PokeList extends Vue {
     return this.$store.state.search;
   }
 
-  get fetchUrl(): string {
-    if (this.typeFilter === "None") {
-      return `pokemon/?offset=${this.numLoaded}&limit=${this.numToLoad}`;
-    } else {
-      return `type/${this.typeFilter}`;
-    }
-  }
-
   get flgFiltered(): boolean {
     if (this.typeFilter === "None") {
       return false;
@@ -71,6 +63,15 @@ export default class PokeList extends Vue {
       return true;
     }
   }
+  
+  get fetchUrl(): string {
+    if (!this.flgFiltered) {
+      return `pokemon/?offset=${this.numLoaded}&limit=${this.numToLoad}`;
+    } else {
+      return `type/${this.typeFilter}`;
+    }
+  }
+
 
   private reset() {
     this.pokemons = [];
