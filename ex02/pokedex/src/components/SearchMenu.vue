@@ -15,7 +15,11 @@
     <v-card>
       <v-card-title>Search</v-card-title>
       <v-divider></v-divider>
-      <v-text-field class="mx-auto"></v-text-field>
+      <v-text-field
+        class="mx-auto"
+        clearable
+        v-model="searchString"
+      ></v-text-field>
       <v-divider></v-divider>
       <v-card-title>Filter</v-card-title>
       <v-divider></v-divider>
@@ -36,16 +40,11 @@
           color="amber lighten-1"
           class="mx-auto"
           rounded
-          @click="dialog = false"
+          @click="search"
         >
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
-        <v-btn
-          color="amber lighten-1"
-          class="mx-auto"
-          rounded
-          @click="typeFilter = 'None'"
-        >
+        <v-btn color="amber lighten-1" class="mx-auto" rounded @click="refresh">
           <v-icon>mdi-refresh</v-icon>
         </v-btn>
       </v-card-actions>
@@ -64,6 +63,7 @@ export default class SearchMenu extends Vue {
   private pokeTypes: PokeType[] = [];
   private dialog = false;
   private typeFilter: string = "None";
+  private searchString: string = "";
   private isLoading = true;
   private messageNotLoaded = "Loading...";
 
@@ -82,6 +82,17 @@ export default class SearchMenu extends Vue {
       });
   }
 
+  private refresh() {
+    this.typeFilter = "None";
+    this.searchString = "";
+  }
+
+  private search() {
+    this.dialog = false;
+    this.$store.commit("changeSearch", this.searchString);
+    this.$store.commit("changeTypeFilter", this.typeFilter);
+  }
+
   async created() {
     await this.fetch();
   }
@@ -90,17 +101,14 @@ export default class SearchMenu extends Vue {
   isPokelistPage() {
     if (this.$route.path == "/") this.isPokeList = true;
     else this.isPokeList = false;
+    this.typeFilter = this.$store.state.typeFilter;
+    this.searchString = this.$store.state.search;
   }
 
   @Watch("language")
-  async reset() {
+  async langReset() {
     this.isLoading = true;
     await this.fetch();
-  }
-
-  @Watch("typeFilter")
-  log(){
-    console.log(this.typeFilter);
   }
 }
 </script>

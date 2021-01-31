@@ -28,7 +28,7 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import InfiniteLoading from "vue-infinite-loading";
 import PokeListItem from "./PokeListItem.vue";
 import Pokemon, { POKE_MAX, fetchPokemons } from "../models/pokemon";
-import { Language } from "../models/language"
+import { Language } from "../models/language";
 
 @Component({
   components: {
@@ -47,11 +47,23 @@ export default class PokeList extends Vue {
     return this.$store.state.language;
   }
 
-  @Watch("language")
-  reset() {
+  get typeFilter(): string {
+    return this.$store.state.typeFilter;
+  }
+
+  get searchString(): string {
+    return this.$store.state.search;
+  }
+
+  private reset() {
     this.pokemons = [];
     this.numLoaded = 0;
     this.$refs.infiniteLoading.stateChanger.reset();
+  }
+
+  @Watch("language")
+  langReset() {
+    this.reset();
   }
 
   async loadPokemons() {
