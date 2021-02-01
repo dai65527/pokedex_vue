@@ -1,12 +1,6 @@
 <template>
   <div>
-    <div
-      :style="{
-        'background-image': 'url(/pokebg.png)',
-        height: '95vh',
-      }"
-      v-if="flgFetched"
-    >
+    <div v-if="flgFetched">
       <div class="mx-auto" :style="{ 'max-width': '1300px', width: '100%' }">
         <v-container>
           <v-row justify="center" align-content="center">
@@ -29,11 +23,7 @@
             <v-col cols="12" sm="6">
               <v-row>
                 <v-col>
-                  <v-card
-                    shaped
-                    class="grey lighten-5"
-                    elevation="4"
-                  >
+                  <v-card shaped class="grey lighten-5" elevation="4">
                     <v-row class="mt-5 mb-2">
                       <v-col cols="2" :style="{ 'text-align': 'center' }">
                         <v-icon v-if="this.id !== 1" @click="refresh(-1)" large

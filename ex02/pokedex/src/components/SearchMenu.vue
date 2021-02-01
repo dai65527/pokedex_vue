@@ -15,10 +15,7 @@
     <v-card>
       <v-card-title>Search</v-card-title>
       <v-divider></v-divider>
-      <v-text-field
-        class="mx-auto"
-        v-model="searchString"
-      ></v-text-field>
+      <v-text-field class="mx-auto" v-model="searchString"></v-text-field>
       <v-divider></v-divider>
       <v-card-title>Filter</v-card-title>
       <v-divider></v-divider>
@@ -35,12 +32,7 @@
       <v-card-text v-if="isLoading">{{ messageNotLoaded }}</v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
-        <v-btn
-          color="amber lighten-1"
-          class="mx-auto"
-          rounded
-          @click="search"
-        >
+        <v-btn color="amber lighten-1" class="mx-auto" rounded @click="search">
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
         <v-btn color="amber lighten-1" class="mx-auto" rounded @click="refresh">
@@ -61,8 +53,8 @@ export default class SearchMenu extends Vue {
   private isPokeList = true;
   private pokeTypes: PokeType[] = [];
   private dialog = false;
-  private typeFilter: string = "None";
-  private searchString: string = "";
+  private typeFilter = "None";
+  private searchString = "";
   private isLoading = true;
   private messageNotLoaded = "Loading...";
 
@@ -98,7 +90,7 @@ export default class SearchMenu extends Vue {
 
   @Watch("$route")
   isPokelistPage() {
-    if (this.$route.path == "/") this.isPokeList = true;
+    if (this.$route.path === "/") this.isPokeList = true;
     else this.isPokeList = false;
     this.typeFilter = this.$store.state.typeFilter;
     this.searchString = this.$store.state.search;

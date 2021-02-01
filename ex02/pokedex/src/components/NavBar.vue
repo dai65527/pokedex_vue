@@ -52,7 +52,7 @@ import SearchMenu from "@/components/SearchMenu.vue";
 @Component({
   components: {
     SearchMenu,
-  }
+  },
 })
 export default class NavBar extends Vue {
   private langNameMap = languageNameMap;

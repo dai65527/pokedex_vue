@@ -2,7 +2,11 @@
   <div id="app">
     <v-app>
       <NavBar />
-      <v-main>
+      <v-main 
+      :style=" this.$route.path !== '/' ? {
+        'background-image': 'url(/pokemon_comp_bg.png)',
+        'background-repeat': 'repeat',
+      } : {}" >
         <router-view />
       </v-main>
     </v-app>
