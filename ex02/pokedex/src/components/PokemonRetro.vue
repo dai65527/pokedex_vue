@@ -6,7 +6,7 @@
         width="400px"
         height="400px"
         img="/retroBg_white.png"
-        :style="{ 'top': '104px', 'overflow': 'hidden' }"
+        :style="{ top: '104px', overflow: 'hidden' }"
       >
         <v-row no-gutters>
           <v-col class="ma-4">
@@ -36,18 +36,18 @@
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col class="mt-1">
+                  <v-col class="mt-2">
                     <span :class="$style.infoText">{{ pokeRetro.genus }}</span>
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col class="mt-1">
+                  <v-col class="mt-2">
                     <span :class="$style.infoText">たかさ </span>
                     <span
                       :class="$style.infoText"
                       class="ml-5"
                       :style="{ 'font-size': '24px' }"
-                      >{{ pokeRetro.height }}m</span
+                      >{{ pokeRetro.height.toFixed(1) }}m</span
                     >
                   </v-col>
                 </v-row>
@@ -58,14 +58,14 @@
                       :class="$style.infoText"
                       class="ml-5"
                       :style="{ 'font-size': '24px' }"
-                      >{{ pokeRetro.weight }}kg</span
+                      >{{ pokeRetro.weight.toFixed(1) }}kg</span
                     >
                   </v-col>
                 </v-row>
               </v-col>
             </v-row>
             <v-row no-gutters>
-              <v-col class="ma-1 pt-3">
+              <v-col class="ma-1 pt-4">
                 <div
                   v-for="item in pokeRetro.flavorText"
                   :key="item"
@@ -79,12 +79,26 @@
           </v-col>
         </v-row>
       </v-card>
-      <v-img
-        src="/gameboy_btn.png"
+      <v-btn
+        @click="refresh(-1)"
+        tile
+        text
+        elevation="0"
+        :style="{ top: '270px', left: '70px' }"
         width="50px"
         height="50px"
-        :style="{ top: '272px', left: '' }"
-      ></v-img>
+      >
+      </v-btn>
+      <v-btn
+        @click="refresh(1)"
+        elevation="0"
+        tile
+        text
+        :style="{ top: '270px', left: '86px' }"
+        width="50px"
+        height="50px"
+      >
+      </v-btn>
     </v-card>
   </v-container>
 </template>
@@ -96,18 +110,20 @@ import PokeRetro, {
   fetchPokeRetroById,
 } from "@/models/pokeRetro";
 import "@/assets/sass/style.scss";
+import router from "@/router";
+import PokeBallSpinner from "@/components/PokeBallSpinner.vue";
+
 @Component({
-  components: {},
+  components: {
+    PokeBallSpinner,
+  },
 })
 export default class PokemonRetro extends Vue {
   private id: number = parseInt(this.$route.params.id);
   private pokeRetro: PokeRetro = emptyPokeRetro;
   private isLoading = true;
+  private isRefresh = false;
   private msgLoading = "Loading...";
-
-  get slicedNumber() {
-    return ("000" + this.pokeInfo.id).slice(-3);
-  }
 
   async fetch() {
     this.pokeRetro = await fetchPokeRetroById(this.id, "ja-Hrkt").catch(
@@ -119,6 +135,17 @@ export default class PokemonRetro extends Vue {
     );
     if (this.pokeRetro !== emptyPokeRetro) {
       this.isLoading = false;
+      this.isRefresh = false;
+    }
+  }
+
+  async refresh(num: number) {
+    if ((this.id === 1 && num === -1) || (this.id === 151 && num === 1)) return;
+    if (!this.isRefresh) {
+      this.isRefresh = true;
+      this.id += num;
+      await this.fetch();
+      router.push({ name: "pokemonRetro", params: { id: String(this.id) } });
     }
   }
 
@@ -131,6 +158,6 @@ export default class PokemonRetro extends Vue {
 <style module>
 .infoText {
   font-family: "M PLUS dot" !important;
-  font-size: 20px;
+  font-size: 18px;
 }
 </style>
