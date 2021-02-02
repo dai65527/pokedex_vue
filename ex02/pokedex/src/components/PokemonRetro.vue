@@ -22,9 +22,9 @@
               <div
                 class="text-center mt-3"
                 :class="$style.infoText"
-                :style="{ 'font-size': '35px' }"
+                :style="{ 'font-size': '35px', 'letter-spacing': '2px' }"
               >
-                No.{{ pokeRetro.id }}
+                No.{{ ("000" + this.pokeRetro.id).slice(-3) }}
               </div>
             </v-col>
             <v-col cols="6" class="mt-3">
@@ -63,12 +63,15 @@
             </v-col>
           </v-row>
           <v-row no-gutters>
-            <v-col class="ma-2 pt-6">
-              <span
+            <v-col class="ma-2 pt-3">
+              <div
+                v-for="item in pokeRetro.flavorText"
+                :key="item"
                 :class="$style.infoText"
-                :style="{ 'white-space': 'pre-wrap' }"
-                >{{ pokeRetro.flavorText }}</span
+                class="my-4"
               >
+                {{ item }}<br />
+              </div>
             </v-col>
           </v-row>
         </v-col>
@@ -93,8 +96,8 @@ export default class PokemonRetro extends Vue {
   private isLoading = true;
   private msgLoading = "Loading...";
 
-  get replacedFlavorText() {
-    return this.pokeRetro.flavorText.replace(/\n/g, "<br>");
+  get slicedNumber() {
+    return ("000" + this.pokeInfo.id).slice(-3);
   }
 
   async fetch() {

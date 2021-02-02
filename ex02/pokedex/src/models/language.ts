@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 08:22:30 by dnakano           #+#    #+#             */
-/*   Updated: 2021/02/02 11:31:20 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/02/02 14:02:14 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,13 @@ export const findGenusInLang = (
 export const findFlavorTextInLang = (
   nameInLangs: { language: { name: Language }; flavor_text: string }[],
   langDesignation: Language
-): string => {
+): string[] => {
   const nameInLang = nameInLangs.find(nameInLang => {
     return nameInLang.language.name === langDesignation;
   });
   if (nameInLang === void 0) {
-    return "N/A";
+    return ["N/A"];
   }
-  return nameInLang.flavor_text;
+  const resText = nameInLang.flavor_text;
+  return resText.split('\n');
 };

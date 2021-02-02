@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:36:39 by totaisei          #+#    #+#             */
-/*   Updated: 2021/02/01 16:59:52 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/02/02 14:01:08 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ export default class PokeRetro extends Pokemon {
     public readonly height: number,
     public readonly genus: string,
     public readonly types: PokeType[],
-    public readonly flavorText: string
+    public readonly flavorText: string[]
   ) {
     super(pokemon.id, pokemon.name, pokemon.imageUrl);
   }
@@ -39,7 +39,7 @@ export const emptyPokeRetro = new PokeRetro(
   0,
   "",
   [],
-  ""
+  []
 );
 
 export const fetchPokeRetroById = async (
