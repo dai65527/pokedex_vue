@@ -9,7 +9,7 @@
       <v-row no-gutters>
         <v-col class="ma-4">
           <v-row no-gutters>
-            <v-col class="mt-6"></v-col>
+            <v-col class="mt-2"></v-col>
           </v-row>
           <v-row>
             <v-col cols="6" class="mt-11">
@@ -20,8 +20,9 @@
                 contain
               />
               <div
-                class="font-weight-bold display-1 text-center mt-1"
-                :style="{'font-family': 'Myfont'}"
+                class="text-center mt-3"
+                :class="$style.infoText"
+                :style="{ 'font-size': '35px' }"
               >
                 No.{{ pokeRetro.id }}
               </div>
@@ -29,30 +30,32 @@
             <v-col cols="6" class="mt-3">
               <v-row>
                 <v-col class="my-2">
-                  <span class="font-weight-bold" :style="'v-application'">{{
-                    pokeRetro.name
-                  }}</span>
+                  <span :class="$style.infoText">{{ pokeRetro.name }}</span>
                 </v-col>
               </v-row>
               <v-row>
                 <v-col class="my-2">
-                  <span class="font-weight-bold">{{
-                    pokeRetro.genus
-                  }}</span>
+                  <span :class="$style.infoText">{{ pokeRetro.genus }}</span>
                 </v-col>
               </v-row>
               <v-row>
-                <v-col class="my-2">
-                  <span class="font-weight-bold">たかさ </span>
-                  <span class="font-weight-bold"
+                <v-col class="my-1">
+                  <span :class="$style.infoText">たかさ </span>
+                  <span
+                    :class="$style.infoText"
+                    class="ml-5"
+                    :style="{ 'font-size': '30px' }"
                     >{{ pokeRetro.height }}m</span
                   >
                 </v-col>
               </v-row>
               <v-row>
-                <v-col class="my-2">
-                  <span class="font-weight-bold">おもさ </span>
-                  <span class="font-weight-bold"
+                <v-col class="mb-2">
+                  <span :class="$style.infoText">おもさ </span>
+                  <span
+                    :class="$style.infoText"
+                    class="ml-5"
+                    :style="{ 'font-size': '30px' }"
                     >{{ pokeRetro.weight }}kg</span
                   >
                 </v-col>
@@ -60,10 +63,12 @@
             </v-col>
           </v-row>
           <v-row no-gutters>
-            <v-col class="ma-8 pt-6">
-              <span class="font-weight-bold">{{
-                pokeRetro.flavorText
-              }}</span>
+            <v-col class="ma-2 pt-6">
+              <span
+                :class="$style.infoText"
+                :style="{ 'white-space': 'pre-wrap' }"
+                >{{ pokeRetro.flavorText }}</span
+              >
             </v-col>
           </v-row>
         </v-col>
@@ -88,6 +93,10 @@ export default class PokemonRetro extends Vue {
   private isLoading = true;
   private msgLoading = "Loading...";
 
+  get replacedFlavorText() {
+    return this.pokeRetro.flavorText.replace(/\n/g, "<br>");
+  }
+
   async fetch() {
     this.pokeRetro = await fetchPokeRetroById(this.id, "ja-Hrkt").catch(
       (err: Error) => {
@@ -107,3 +116,9 @@ export default class PokemonRetro extends Vue {
 }
 </script>
 
+<style module>
+.infoText {
+  font-family: "M PLUS dot" !important;
+  font-size: 25px;
+}
+</style>
