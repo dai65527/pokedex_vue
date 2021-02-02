@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pokeType.ts                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 07:16:00 by dnakano           #+#    #+#             */
-/*   Updated: 2021/01/17 12:48:05 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/01/30 18:57:49 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import axios from "axios";
 import { findNameInLang, Language } from "./language";
+import { POKEAPI_ROOT } from "./pokemon";
 
 type PokeTypeNameEn =
   | "normal"
@@ -51,6 +52,18 @@ type TypeObj = {
   };
 };
 
+const fetchAPokeType = async (
+  typeObjUrl: string,
+  lang: Language
+): Promise<PokeType> => {
+  const res = await axios.get(typeObjUrl);
+  return new PokeType(
+    res.data.id,
+    res.data.name,
+    findNameInLang(res.data.names, lang)
+  );
+}
+
 export const fetchPokeTypes = async (
   typeObjAry: TypeObj[],
   lang: Language
@@ -58,13 +71,24 @@ export const fetchPokeTypes = async (
   return await Promise.all(
     typeObjAry.map(
       async (typeObj): Promise<PokeType> => {
-        const res = await axios.get(typeObj.type.url);
-        return new PokeType(
-          res.data.id,
-          typeObj.type.name,
-          findNameInLang(res.data.names, lang)
-        );
+        return fetchAPokeType(typeObj.type.url, lang);
       }
     )
   );
+};
+
+export const fetchPokeTypesInLang = async (
+  lang: Language
+): Promise<PokeType[]> => {
+  const resTypes = await axios.get(POKEAPI_ROOT + 'type');
+  const tmpTypes: {name: string, url: string}[] = resTypes.data.results;
+  const tmpTypesInlang = await Promise.all(
+    tmpTypes.map(
+      async (item): Promise<PokeType> => {
+        return fetchAPokeType(item.url, lang);
+      }
+    )
+  );
+  const pokeTypesInlang = tmpTypesInlang.filter(item => item.id < 1000);
+  return pokeTypesInlang;
 };

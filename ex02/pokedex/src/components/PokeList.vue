@@ -6,6 +6,7 @@
           v-for="pokemon in pokemons"
           :key="pokemon.id"
           :pokemon="pokemon"
+          :searchString="searchString"
         />
       </v-row>
     </v-container>
@@ -28,7 +29,7 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import InfiniteLoading from "vue-infinite-loading";
 import PokeListItem from "./PokeListItem.vue";
 import Pokemon, { POKE_MAX, fetchPokemons } from "../models/pokemon";
-import { Language } from "../models/language"
+import { Language } from "../models/language";
 
 @Component({
   components: {
@@ -39,7 +40,7 @@ import { Language } from "../models/language"
 export default class PokeList extends Vue {
   private pokemons: Pokemon[] = [];
   private numLoaded = 0;
-  private numToLoad = 36;
+  private numToLoad = 72;
   private flgErrLoading = false;
   private axiosErrorMessage = "";
 
@@ -47,23 +48,64 @@ export default class PokeList extends Vue {
     return this.$store.state.language;
   }
 
-  @Watch("language")
-  reset() {
+  get typeFilter(): string {
+    return this.$store.state.typeFilter;
+  }
+
+  get searchString(): string {
+    return this.$store.state.search;
+  }
+
+  get flgFiltered(): boolean {
+    if (this.typeFilter === "None") {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  
+  get fetchUrl(): string {
+    if (!this.flgFiltered) {
+      return `pokemon/?offset=${this.numLoaded}&limit=${this.numToLoad}`;
+    } else {
+      return `type/${this.typeFilter}`;
+    }
+  }
+
+
+  private reset() {
     this.pokemons = [];
     this.numLoaded = 0;
     this.$refs.infiniteLoading.stateChanger.reset();
   }
 
+  @Watch("language")
+  langReset() {
+    this.reset();
+  }
+
+  @Watch("typeFilter")
+  filterReset() {
+    this.reset();
+  }
+
+  @Watch("searchString")
+  searchReset() {
+    this.reset();
+  }
   async loadPokemons() {
     let flgFinishLoading = false;
-    if (this.numLoaded + this.numToLoad >= POKE_MAX) {
+    if (!this.flgFiltered && this.numLoaded + this.numToLoad >= POKE_MAX) {
       this.numToLoad = POKE_MAX - this.numLoaded;
       flgFinishLoading = true;
     }
+    if (this.flgFiltered) {
+      flgFinishLoading = true;
+    }
     const fetchedPokemons = await fetchPokemons(
-      this.numLoaded,
-      this.numToLoad,
-      this.language
+      this.fetchUrl,
+      this.language,
+      this.flgFiltered
     ).catch((error: Error): Pokemon[] => {
       this.axiosErrorMessage = error.message;
       this.flgErrLoading = true;

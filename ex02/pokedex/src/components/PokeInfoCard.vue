@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col class="ma-auto mx-auto" cols="10">
+    <v-col class="mx-auto" cols="10">
       <v-card shaped class="grey lighten-5" elevation="4">
         <poke-info-text
           v-for="item in informations"
@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import PokeInfo from "@/models/pokeInfo.ts";
 import PokeInfoText from "@/components/PokeInfoText.vue";
 
@@ -28,7 +28,23 @@ export default class PokeInfoCard extends Vue {
   private pokeInfo!: PokeInfo;
   private informations: { title: string; value: string | number }[] = [];
 
-  created() {
+  created()
+  {
+    this.reset();
+  }
+
+  @Watch("pokeInfo")
+  changeId(){
+    this.reset();
+  }
+
+  reset() {
+    this.informations.splice(0, this.informations.length)
+    this.informations.push({
+      title:
+        this.$store.state.language === "ja-Hrkt" ? "図鑑番号" : "PokedexNo",
+      value: ("000" + this.pokeInfo.id).slice(-3),
+    });
     this.informations.push({
       title: this.$store.state.language === "ja-Hrkt" ? "ぶんるい" : "GENUS",
       value: `${this.pokeInfo.genus}`,

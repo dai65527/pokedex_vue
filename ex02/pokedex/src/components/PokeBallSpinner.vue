@@ -14,9 +14,7 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <p
-            class="mx-auto grey--text text--lighten-1 display-1 text text-center"
-          >
+          <p class="mx-auto grey--text display-1 text text-center">
             {{ infoText }}
           </p>
         </v-col>

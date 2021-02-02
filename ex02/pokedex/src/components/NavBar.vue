@@ -12,6 +12,7 @@
         </router-link>
       </div>
       <v-spacer></v-spacer>
+      <search-menu></search-menu>
       <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -46,8 +47,13 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { Language, languageNameMap } from "@/models/language";
+import SearchMenu from "@/components/SearchMenu.vue";
 
-@Component({})
+@Component({
+  components: {
+    SearchMenu,
+  },
+})
 export default class NavBar extends Vue {
   private langNameMap = languageNameMap;
   private selectedLanguageIndex = 0;
