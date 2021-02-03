@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:36:39 by totaisei          #+#    #+#             */
-/*   Updated: 2021/02/02 14:01:08 by totaisei         ###   ########.fr       */
+/*   Updated: 2021/02/03 14:28:10 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ import {
   findFlavorTextInLang,
   Language,
 } from "./language";
+
+
+export const POKERETRO_MAX = 151;
 
 export default class PokeRetro extends Pokemon {
   constructor(

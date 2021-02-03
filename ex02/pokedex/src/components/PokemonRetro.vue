@@ -108,6 +108,7 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 import PokeRetro, {
   emptyPokeRetro,
   fetchPokeRetroById,
+  POKERETRO_MAX,
 } from "@/models/pokeRetro";
 import "@/assets/sass/style.scss";
 import router from "@/router";
@@ -146,6 +147,12 @@ export default class PokemonRetro extends Vue {
       this.id += num;
       await this.fetch();
       router.push({ name: "pokemonRetro", params: { id: String(this.id) } });
+    }
+  }
+
+  created() {
+    if (this.id > POKERETRO_MAX) {
+      router.push({ name: "pokemon", params: { id: String(this.id) } });
     }
   }
 
