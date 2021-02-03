@@ -50,7 +50,6 @@ import { Language } from "@/models/language";
 
 @Component({})
 export default class SearchMenu extends Vue {
-  private isPokeList = true;
   private pokeTypes: PokeType[] = [];
   private dialog = false;
   private typeFilter = "None";
@@ -60,6 +59,11 @@ export default class SearchMenu extends Vue {
 
   get language(): Language {
     return this.$store.state.language;
+  }
+
+  get isPokeList(): boolea{
+    if (this.$route.path === "/"){return true;}
+    else return false;
   }
 
   private async fetch() {
@@ -90,8 +94,6 @@ export default class SearchMenu extends Vue {
 
   @Watch("$route")
   isPokelistPage() {
-    if (this.$route.path === "/") this.isPokeList = true;
-    else this.isPokeList = false;
     this.typeFilter = this.$store.state.typeFilter;
     this.searchString = this.$store.state.search;
   }

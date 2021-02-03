@@ -1,5 +1,5 @@
 <template>
-  <v-menu offset-y>
+  <v-menu v-if="!isRetroPage" offset-y>
     <template v-slot:activator="{ on, attrs }">
       <v-btn
         color="amber lighten-1"
@@ -41,6 +41,12 @@ export default class LangMenu extends Vue {
 
   get langDisplayName() {
     return this.langNameMap.get(this.$store.state.language);
+  }
+
+  get isRetroPage(): boolean {
+    if (!this.$route.path.indexOf("/pokemonRetro")) {
+      return true;
+    } else return false;
   }
 
   changeLanguage(lang: Language) {
