@@ -1,8 +1,8 @@
 <template>
   <div>
     <div v-if="flgFetched">
-      <div class="mx-auto" :style="{ 'max-width': '1300px', width: '100%' }">
-        <v-container>
+      <div class="mx-auto" :style="{ 'max-width': '1200px', width: '100%' }">
+        <v-container class="mt-n6">
           <v-row justify="center" align-content="center">
             <v-col cols="12" sm="6" class="my-auto">
               <v-row justify="center" align-content="center" no-gutters>
