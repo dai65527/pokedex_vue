@@ -16,11 +16,23 @@
             <v-row>
               <v-col cols="6">
                 <v-img
+                  v-if="isFetched"
                   :src="pokeRetro.imageUrl"
                   :alt="pokeRetro.name"
                   height="150"
                   contain
                 />
+                <div
+                  v-show="!isFetched"
+                  :style="{
+                    'text-align': 'center',
+                    height: '150px',
+                  }"
+                >
+                  <div class="py-16" :class="$style.infoText">
+                    {{ msgLoading }}
+                  </div>
+                </div>
                 <div
                   class="text-center mt-1"
                   :class="$style.infoText"
@@ -125,6 +137,10 @@ export default class PokemonRetro extends Vue {
   private isLoading = true;
   private isRefresh = false;
   private msgLoading = "Loading...";
+
+  get isFetched() {
+    return !this.isLoading && !this.isRefresh;
+  }
 
   async fetch() {
     this.pokeRetro = await fetchPokeRetroById(this.id, "ja-Hrkt").catch(
