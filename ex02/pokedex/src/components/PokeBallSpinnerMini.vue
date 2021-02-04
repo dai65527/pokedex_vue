@@ -7,14 +7,14 @@
             v-if="isLoading"
             src="/pokeball_bg.png"
             :class="$style.pokeBall"
-            class="mx-auto my-16"
-            width="150"
+            class="mx-auto"
+            width="50"
           ></v-img>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
-          <p class="mx-auto grey--text display-1 text text-center">
+          <p class="mx-auto grey--text headline text text-center">
             {{ infoText }}
           </p>
         </v-col>
@@ -27,7 +27,7 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component({})
-export default class PokeBallSpinner extends Vue {
+export default class PokeBallSpinnerMini extends Vue {
   @Prop()
   private infoText!: string;
   @Prop()

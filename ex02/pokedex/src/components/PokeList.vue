@@ -13,9 +13,14 @@
     <InfiniteLoading
       v-if="!flgErrLoading"
       ref="infiniteLoading"
-      spinner="spiral"
       @infinite="loadPokemons"
     >
+      <template slot="spinner">
+        <poke-ball-spinner-mini
+          :infoText="axiosErrorMessage"
+          :isLoading="!flgErrLoading"
+        ></poke-ball-spinner-mini>
+      </template>
       <span slot="no-more">End of list</span>
     </InfiniteLoading>
     <div v-if="flgErrLoading">
@@ -30,11 +35,13 @@ import InfiniteLoading from "vue-infinite-loading";
 import PokeListItem from "./PokeListItem.vue";
 import Pokemon, { POKE_MAX, fetchPokemons } from "../models/pokemon";
 import { Language } from "../models/language";
+import PokeBallSpinnerMini from "@/components/PokeBallSpinnerMini.vue";
 
 @Component({
   components: {
     PokeListItem,
     InfiniteLoading,
+    PokeBallSpinnerMini,
   },
 })
 export default class PokeList extends Vue {
@@ -42,7 +49,7 @@ export default class PokeList extends Vue {
   private numLoaded = 0;
   private numToLoad = 72;
   private flgErrLoading = false;
-  private axiosErrorMessage = "";
+  private axiosErrorMessage = "Loading...";
 
   get language(): Language {
     return this.$store.state.language;
@@ -63,7 +70,7 @@ export default class PokeList extends Vue {
       return true;
     }
   }
-  
+
   get fetchUrl(): string {
     if (!this.flgFiltered) {
       return `pokemon/?offset=${this.numLoaded}&limit=${this.numToLoad}`;
@@ -72,11 +79,14 @@ export default class PokeList extends Vue {
     }
   }
 
+  get infiniteLoading(): InfiniteLoading {
+    return this.$refs.infiniteLoading as InfiniteLoading;
+  }
 
   private reset() {
     this.pokemons = [];
     this.numLoaded = 0;
-    this.$refs.infiniteLoading.stateChanger.reset();
+    this.infiniteLoading.stateChanger.reset();
   }
 
   @Watch("language")
@@ -113,9 +123,9 @@ export default class PokeList extends Vue {
     });
     this.numLoaded += fetchedPokemons.length;
     this.pokemons = this.pokemons.concat(fetchedPokemons);
-    this.$refs.infiniteLoading.stateChanger.loaded();
+    this.infiniteLoading.stateChanger.loaded();
     if (flgFinishLoading) {
-      this.$refs.infiniteLoading.stateChanger.complete();
+      this.infiniteLoading.stateChanger.complete();
     }
   }
 }

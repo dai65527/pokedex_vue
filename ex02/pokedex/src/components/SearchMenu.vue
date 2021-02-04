@@ -61,18 +61,19 @@ export default class SearchMenu extends Vue {
     return this.$store.state.language;
   }
 
-  get isPokeList(): boolean{
-    if (this.$route.path === "/"){return true;}
-    else return false;
+  get isPokeList(): boolean {
+    if (this.$route.path === "/") {
+      return true;
+    } else return false;
   }
 
   private async fetch() {
     fetchPokeTypesInLang(this.language)
-      .then((ary) => {
+      .then(ary => {
         this.pokeTypes = ary;
         this.isLoading = false;
       })
-      .catch((err) => {
+      .catch(err => {
         this.messageNotLoaded = err;
       });
   }
