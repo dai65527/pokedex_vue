@@ -12,6 +12,7 @@
         </router-link>
       </div>
       <v-spacer></v-spacer>
+      <retro-button></retro-button>
       <search-menu></search-menu>
       <lang-menu></lang-menu>
     </v-app-bar>
@@ -22,12 +23,14 @@
 import { Component, Vue } from "vue-property-decorator";
 import SearchMenu from "@/components/SearchMenu.vue";
 import LangMenu from "@/components/LangMenu.vue";
+import RetroButton from "@/components/RetroButton.vue";
 
 @Component({
   components: {
     SearchMenu,
     LangMenu,
-  },
+    RetroButton
+  }
 })
 export default class NavBar extends Vue {}
 </script>
