@@ -13,7 +13,7 @@
                     :alt="pokeInfo.name"
                   />
                   <poke-ball-spinner
-                    v-if="isRefresh"
+                    v-show="isRefresh"
                     :isMiniSpinner="false"
                     :infoText="messageNotLoaded"
                     :isLoading="flgLoading"
@@ -55,7 +55,7 @@
       </div>
     </div>
     <poke-ball-spinner
-      v-if="!flgFetched"
+      v-show="!flgFetched"
       :isMiniSpinner="false"
       :infoText="messageNotLoaded"
       :isLoading="flgLoading"
