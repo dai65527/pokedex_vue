@@ -41,8 +41,8 @@ import PokeBallSpinnerMini from "@/components/PokeBallSpinnerMini.vue";
   components: {
     PokeListItem,
     InfiniteLoading,
-    PokeBallSpinnerMini,
-  },
+    PokeBallSpinnerMini
+  }
 })
 export default class PokeList extends Vue {
   private pokemons: Pokemon[] = [];
