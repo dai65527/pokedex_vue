@@ -16,10 +16,11 @@
       @infinite="loadPokemons"
     >
       <template slot="spinner">
-        <poke-ball-spinner-mini
+        <poke-ball-spinner
+          :isMiniSpinner="true"
           :infoText="axiosErrorMessage"
           :isLoading="!flgErrLoading"
-        ></poke-ball-spinner-mini>
+        ></poke-ball-spinner>
       </template>
       <span slot="no-more">End of list</span>
     </InfiniteLoading>
@@ -35,13 +36,13 @@ import InfiniteLoading from "vue-infinite-loading";
 import PokeListItem from "./PokeListItem.vue";
 import Pokemon, { POKE_MAX, fetchPokemons } from "../models/pokemon";
 import { Language } from "../models/language";
-import PokeBallSpinnerMini from "@/components/PokeBallSpinnerMini.vue";
+import PokeBallSpinner from "@/components/PokeBallSpinner.vue";
 
 @Component({
   components: {
     PokeListItem,
     InfiniteLoading,
-    PokeBallSpinnerMini
+    PokeBallSpinner
   }
 })
 export default class PokeList extends Vue {

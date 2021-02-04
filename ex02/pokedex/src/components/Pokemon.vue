@@ -14,6 +14,7 @@
                   />
                   <poke-ball-spinner
                     v-if="isRefresh"
+                    :isMiniSpinner="false"
                     :infoText="messageNotLoaded"
                     :isLoading="flgLoading"
                   ></poke-ball-spinner>
@@ -55,6 +56,7 @@
     </div>
     <poke-ball-spinner
       v-if="!flgFetched"
+      :isMiniSpinner="false"
       :infoText="messageNotLoaded"
       :isLoading="flgLoading"
     ></poke-ball-spinner>
