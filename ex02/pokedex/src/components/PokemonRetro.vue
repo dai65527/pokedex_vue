@@ -119,7 +119,6 @@
         </v-btn>
         <v-btn
           elevation="0"
-          rounded
           color="transparent"
           width="10px"
           height="50px"
