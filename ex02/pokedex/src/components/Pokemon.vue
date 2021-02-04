@@ -68,15 +68,15 @@ import PokeBallSpinner from "@/components/PokeBallSpinner.vue";
 import PokeChart from "@/components/PokeChart.vue";
 import PokeInfoCard from "@/components/PokeInfoCard.vue";
 import { Language } from "@/models/language";
-import Pokemon, { POKE_MAX } from "@/models/pokemon";
+import { POKE_MAX } from "@/models/pokemon";
 import router from "@/router";
 
 @Component({
   components: {
     PokeBallSpinner,
     PokeChart,
-    PokeInfoCard,
-  },
+    PokeInfoCard
+  }
 })
 export default class Pokedex extends Vue {
   private id: number = parseInt(this.$route.params.id);
@@ -121,6 +121,10 @@ export default class Pokedex extends Vue {
   async reset() {
     this.isRefresh = true;
     await this.fetch();
+  }
+
+  created() {
+    if (this.id < 1 || this.id > 10000) this.id = 0;
   }
 
   async mounted() {
