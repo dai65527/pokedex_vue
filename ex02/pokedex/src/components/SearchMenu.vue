@@ -61,7 +61,7 @@ export default class SearchMenu extends Vue {
     return this.$store.state.language;
   }
 
-  get isPokeList(): boolea{
+  get isPokeList(): boolean{
     if (this.$route.path === "/"){return true;}
     else return false;
   }
