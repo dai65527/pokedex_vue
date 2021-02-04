@@ -1,12 +1,19 @@
 <template>
   <v-container>
-    <v-card class="mx-auto" width="560px" height="880px" img="/gameboy_bg.png">
+    <v-card
+      class="mx-auto"
+      width="560px"
+      height="880px"
+      min-width="560px"
+      min-height="880px"
+      img="/gameboy_bg.png"
+      :style="{ 'padding-top': '104px' }"
+    >
       <v-card
         class="mx-auto"
         width="400px"
         height="400px"
         img="/retroBg_white.png"
-        :style="{ top: '104px', overflow: 'hidden' }"
       >
         <v-row no-gutters>
           <v-col class="ma-4">
@@ -26,7 +33,7 @@
                   v-show="!isFetched"
                   :style="{
                     'text-align': 'center',
-                    height: '150px',
+                    height: '150px'
                   }"
                 >
                   <div class="py-16" :class="$style.infoText">
@@ -91,36 +98,46 @@
           </v-col>
         </v-row>
       </v-card>
-      <v-btn
-        @click="refresh(-1)"
-        tile
-        text
-        elevation="0"
-        :style="{ top: '270px', left: '70px' }"
-        width="50px"
-        height="50px"
-      >
-      </v-btn>
-      <v-btn
-        @click="refresh(1)"
-        elevation="0"
-        tile
-        text
-        :style="{ top: '270px', left: '86px' }"
-        width="50px"
-        height="50px"
-      >
-      </v-btn>
+      <div :style="{ 'margin-top': '166px' }">
+        <v-btn
+          @click="refresh(-1)"
+          elevation="0"
+          color="transparent"
+          width="50px"
+          height="50px"
+          :style="{ 'margin-left': '70px' }"
+        >
+        </v-btn>
+        <v-btn
+          @click="refresh(1)"
+          elevation="0"
+          color="transparent"
+          width="50px"
+          height="50px"
+          :style="{ 'margin-left': '20px' }"
+        >
+        </v-btn>
+        <v-btn
+          elevation="0"
+          rounded
+          color="transparent"
+          width="10px"
+          height="50px"
+          :to="{ name: 'pokemon', params: { id: this.$route.params.id } }"
+          :style="{ 'margin-left': '138px' }"
+        >
+        </v-btn>
+      </div>
     </v-card>
   </v-container>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import PokeRetro, {
   emptyPokeRetro,
   fetchPokeRetroById,
-  POKERETRO_MAX,
+  POKERETRO_MAX
 } from "@/models/pokeRetro";
 import "@/assets/sass/style.scss";
 import router from "@/router";
@@ -128,8 +145,8 @@ import PokeBallSpinner from "@/components/PokeBallSpinner.vue";
 
 @Component({
   components: {
-    PokeBallSpinner,
-  },
+    PokeBallSpinner
+  }
 })
 export default class PokemonRetro extends Vue {
   private id: number = parseInt(this.$route.params.id);
