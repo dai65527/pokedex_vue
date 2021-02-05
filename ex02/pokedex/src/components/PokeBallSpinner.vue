@@ -8,6 +8,7 @@
             src="/pokeball_bg.png"
             :class="isMiniSpinner ? $style.pokeBallMini : $style.pokeBall"
             class="mx-auto"
+            lazy-src="/pokeball_bg.png"
           ></v-img>
         </v-col>
       </v-row>
@@ -44,6 +45,7 @@ export default class PokeBallSpinner extends Vue {
   animation: rotation 4s linear infinite;
   filter: brightness(50%);
   width: 150px;
+  min-width: 150px;
   margin-top: 64px;
   margin-bottom: 64px;
 }
@@ -51,6 +53,7 @@ export default class PokeBallSpinner extends Vue {
 .pokeBallMini {
   animation: rotation 4s linear infinite;
   width: 50px;
+  min-width: 50px;
 }
 
 .Text {

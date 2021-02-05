@@ -33,7 +33,7 @@
                   v-show="!isFetched"
                   :style="{
                     'text-align': 'center',
-                    height: '150px'
+                    height: '150px',
                   }"
                 >
                   <div class="py-16" :class="$style.infoText">
@@ -132,11 +132,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import PokeRetro, {
   emptyPokeRetro,
   fetchPokeRetroById,
-  POKERETRO_MAX
+  POKERETRO_MAX,
 } from "@/models/pokeRetro";
 import "@/assets/sass/style.scss";
 import router from "@/router";
@@ -144,8 +144,8 @@ import PokeBallSpinner from "@/components/PokeBallSpinner.vue";
 
 @Component({
   components: {
-    PokeBallSpinner
-  }
+    PokeBallSpinner,
+  },
 })
 export default class PokemonRetro extends Vue {
   private id: number = parseInt(this.$route.params.id);
@@ -190,6 +190,12 @@ export default class PokemonRetro extends Vue {
 
   async mounted() {
     await this.fetch();
+  }
+
+  @Watch("$route")
+  async watchPath() {
+    this.id = parseInt(this.$route.params.id);
+    await this.refresh(0);
   }
 }
 </script>
