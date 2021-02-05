@@ -1,8 +1,8 @@
 <template>
   <div>
     <div v-if="flgFetched">
-      <div class="mx-auto" :style="{ 'max-width': '1300px', width: '100%' }">
-        <v-container>
+      <div class="mx-auto" :style="{ 'max-width': '1200px', width: '100%' }">
+        <v-container class="mt-n6">
           <v-row justify="center" align-content="center">
             <v-col cols="12" sm="6" class="my-auto">
               <v-row justify="center" align-content="center" no-gutters>
@@ -13,7 +13,8 @@
                     :alt="pokeInfo.name"
                   />
                   <poke-ball-spinner
-                    v-if="isRefresh"
+                    v-show="isRefresh"
+                    :isMiniSpinner="false"
                     :infoText="messageNotLoaded"
                     :isLoading="flgLoading"
                   ></poke-ball-spinner>
@@ -54,7 +55,8 @@
       </div>
     </div>
     <poke-ball-spinner
-      v-if="!flgFetched"
+      v-show="!flgFetched"
+      :isMiniSpinner="false"
       :infoText="messageNotLoaded"
       :isLoading="flgLoading"
     ></poke-ball-spinner>
@@ -68,15 +70,15 @@ import PokeBallSpinner from "@/components/PokeBallSpinner.vue";
 import PokeChart from "@/components/PokeChart.vue";
 import PokeInfoCard from "@/components/PokeInfoCard.vue";
 import { Language } from "@/models/language";
-import Pokemon, { POKE_MAX } from "@/models/pokemon";
+import { POKE_MAX } from "@/models/pokemon";
 import router from "@/router";
 
 @Component({
   components: {
     PokeBallSpinner,
     PokeChart,
-    PokeInfoCard,
-  },
+    PokeInfoCard
+  }
 })
 export default class Pokedex extends Vue {
   private id: number = parseInt(this.$route.params.id);
@@ -121,6 +123,10 @@ export default class Pokedex extends Vue {
   async reset() {
     this.isRefresh = true;
     await this.fetch();
+  }
+
+  created() {
+    if (this.id < 1 || this.id > 10000) this.id = 0;
   }
 
   async mounted() {

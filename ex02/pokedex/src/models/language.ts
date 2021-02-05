@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   language.ts                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 08:22:30 by dnakano           #+#    #+#             */
-/*   Updated: 2021/01/28 13:56:43 by dnakano          ###   ########.fr       */
+/*   Updated: 2021/02/02 14:02:14 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,18 @@ export const findGenusInLang = (
     return "N/A";
   }
   return nameInLang.genus;
+};
+
+export const findFlavorTextInLang = (
+  nameInLangs: { language: { name: Language }; flavor_text: string }[],
+  langDesignation: Language
+): string[] => {
+  const nameInLang = nameInLangs.find(nameInLang => {
+    return nameInLang.language.name === langDesignation;
+  });
+  if (nameInLang === void 0) {
+    return ["N/A"];
+  }
+  const resText = nameInLang.flavor_text;
+  return resText.split('\n');
 };
