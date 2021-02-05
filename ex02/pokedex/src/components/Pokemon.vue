@@ -77,8 +77,8 @@ import router from "@/router";
   components: {
     PokeBallSpinner,
     PokeChart,
-    PokeInfoCard
-  }
+    PokeInfoCard,
+  },
 })
 export default class Pokedex extends Vue {
   private id: number = parseInt(this.$route.params.id);
@@ -123,6 +123,12 @@ export default class Pokedex extends Vue {
   async reset() {
     this.isRefresh = true;
     await this.fetch();
+  }
+
+  @Watch("$route")
+  async watchPath() {
+    this.id = parseInt(this.$route.params.id);
+    await this.refresh(0);
   }
 
   created() {
