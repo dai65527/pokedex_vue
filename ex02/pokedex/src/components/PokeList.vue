@@ -106,6 +106,7 @@ export default class PokeList extends Vue {
   }
   async loadPokemons() {
     let flgFinishLoading = false;
+    const langToLoad = this.language;
     if (!this.flgFiltered && this.numLoaded + this.numToLoad >= POKE_MAX) {
       this.numToLoad = POKE_MAX - this.numLoaded;
       flgFinishLoading = true;
@@ -122,6 +123,10 @@ export default class PokeList extends Vue {
       this.flgErrLoading = true;
       return [];
     });
+    // do notihing if language setting changed while loading
+    if (langToLoad != this.language) {
+      return;
+    }
     this.numLoaded += fetchedPokemons.length;
     this.pokemons = this.pokemons.concat(fetchedPokemons);
     this.infiniteLoading.stateChanger.loaded();
