@@ -6,6 +6,7 @@ import PokemonRetro from './components/PokemonRetro.vue';
 
 Vue.use(Router);
 export default new Router({
+  base: "/pokedex_vue/",
   routes: [
     {
       path: "/",
