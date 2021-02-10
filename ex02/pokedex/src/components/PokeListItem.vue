@@ -6,7 +6,7 @@
       :to="{ name: 'pokemon', params: { id: pokemon.id } }"
       class="mx-auto"
     >
-      <v-img src="/pokeball_bg.png" :alt="pokemon.name">
+      <v-img :src="require('@/assets/pokeball_bg.png')" :alt="pokemon.name">
         <v-img :src="pokemon.imageUrl" :alt="pokemon.name"> </v-img>
       </v-img>
       <p class="font-weight-black body-1 py-3 mx-3">

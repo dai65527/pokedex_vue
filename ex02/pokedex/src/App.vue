@@ -2,11 +2,7 @@
   <div id="app">
     <v-app>
       <NavBar />
-      <v-main 
-      :style=" this.$route.path !== '/' ? {
-        'background-image': 'url(/pokemon_comp_bg.png)',
-        'background-repeat': 'repeat',
-      } : {}" >
+      <v-main :class="this.$route.path !== '/' ? 'poke_comp_bg' : ''">
         <router-view />
       </v-main>
     </v-app>
@@ -23,3 +19,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.poke_comp_bg {
+  background-image: url("~@/assets/pokemon_comp_bg.png");
+}
+</style>
