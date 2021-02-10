@@ -6,14 +6,14 @@
       height="880px"
       min-width="560px"
       min-height="880px"
-      img="/gameboy_bg.png"
+      img="/pokedex_vue/gameboy_bg.png"
       :style="{ 'padding-top': '104px' }"
     >
       <v-card
         class="mx-auto"
         width="400px"
         height="400px"
-        img="/retroBg_white.png"
+        img="/pokedex_vue/retroBg_white.png"
       >
         <v-row no-gutters>
           <v-col class="ma-4">

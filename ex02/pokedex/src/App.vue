@@ -4,7 +4,7 @@
       <NavBar />
       <v-main 
       :style=" this.$route.path !== '/' ? {
-        'background-image': 'url(/pokemon_comp_bg.png)',
+        'background-image': 'url(/pokedex_vue/pokemon_comp_bg.png)',
         'background-repeat': 'repeat',
       } : {}" >
         <router-view />

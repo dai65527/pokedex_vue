@@ -5,10 +5,10 @@
         <v-col>
           <v-img
             v-if="isLoading"
-            src="/pokeball_bg.png"
+            src="/pokedex_vue/pokeball_bg.png"
             :class="isMiniSpinner ? $style.pokeBallMini : $style.pokeBall"
             class="mx-auto"
-            lazy-src="/pokeball_bg.png"
+            lazy-src="/pokedex_vue/pokeball_bg.png"
           ></v-img>
         </v-col>
       </v-row>
