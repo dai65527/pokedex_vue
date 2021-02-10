@@ -15,6 +15,9 @@
       spinner="spiral"
       @infinite="loadPokemons"
     >
+      <template slot="spinner">
+        <p>Loading...</p>
+      </template>
       <span slot="no-more">End of list</span>
     </InfiniteLoading>
     <div v-if="flgErrLoading">
@@ -42,6 +45,10 @@ export default class PokeList extends Vue {
   private flgErrLoading = false;
   private axiosErrorMessage = "";
 
+  get infiniteLoading(): InfiniteLoading {
+    return this.$refs.infiniteLoading as InfiniteLoading;
+  }
+
   async loadPokemons() {
     let flgFinishLoading = false;
     if (this.numLoaded + this.numToLoad >= POKE_MAX) {
@@ -59,9 +66,9 @@ export default class PokeList extends Vue {
     });
     this.numLoaded += fetchedPokemons.length;
     this.pokemons = this.pokemons.concat(fetchedPokemons);
-    this.$refs.infiniteLoading.stateChanger.loaded();
+    this.infiniteLoading.stateChanger.loaded();
     if (flgFinishLoading) {
-      this.$refs.infiniteLoading.stateChanger.complete();
+      this.infiniteLoading.stateChanger.complete();
     }
   }
 }
