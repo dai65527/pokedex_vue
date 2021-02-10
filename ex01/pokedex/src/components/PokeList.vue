@@ -12,7 +12,6 @@
     <InfiniteLoading
       v-if="!flgErrLoading"
       ref="infiniteLoading"
-      spinner="spiral"
       @infinite="loadPokemons"
     >
       <template slot="spinner">
