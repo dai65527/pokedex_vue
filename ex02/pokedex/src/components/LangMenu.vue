@@ -8,7 +8,9 @@
         v-bind="attrs"
         v-on="on"
       >
-        {{ langDisplayName }}
+        <span v-if="$vuetify.breakpoint.mdAndUp" class="mr-1">
+          {{ langDisplayName }}
+        </span>
         <v-icon dense>mdi-earth</v-icon>
       </v-btn>
     </template>
