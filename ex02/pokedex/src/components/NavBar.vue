@@ -1,6 +1,6 @@
 <template>
   <v-app-bar
-    :class="[$vuetify.breakpoint.xs ? 'px-2' : 'px-7']"
+    :class="[$vuetify.breakpoint.smAndDown ? 'px-2' : 'px-8']"
     app
     color="red"
   >
