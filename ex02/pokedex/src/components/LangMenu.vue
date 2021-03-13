@@ -9,7 +9,7 @@
         v-on="on"
       >
         {{ langDisplayName }}
-        <v-icon>mdi-menu-down</v-icon>
+        <v-icon dense>mdi-earth</v-icon>
       </v-btn>
     </template>
     <v-list>
