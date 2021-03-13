@@ -7,8 +7,8 @@
     <router-link :to="{ name: 'pokedex' }">
       <v-img
         :src="require('@/assets/pokedex_logo.png')"
-        max-height="56"
-        max-width="200"
+        :max-height="[$vuetify.breakpoint.smAndDown ? '48' : '56']"
+        max-width="180"
         contain
       ></v-img>
     </router-link>
