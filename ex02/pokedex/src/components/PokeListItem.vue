@@ -9,7 +9,10 @@
       <v-img src="/pokeball_bg.png" :alt="pokemon.name">
         <v-img :src="pokemon.imageUrl" :alt="pokemon.name"> </v-img>
       </v-img>
-      <p class="font-weight-bold body-1 py-3 mx-3 grey--text text--darken-2" >
+      <p v-if="$vuetify.breakpoint.xs" class="font-weight-bold body-1 py-3 mx-3 grey--text text--darken-2">
+        {{ pokemon.name }}
+      </p>
+      <p v-else class="font-weight-bold body-1 py-3 mx-3 grey--text text--darken-2">
         {{ "No." + pokemon.id + ": " + pokemon.name }}
       </p>
     </v-card>
