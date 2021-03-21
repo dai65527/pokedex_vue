@@ -1,22 +1,22 @@
 <template>
-  <div>
-    <v-app-bar app color="red">
-      <div class="mx-2">
-        <router-link :to="{ name: 'pokedex' }">
-          <v-img
-            :src="require('@/assets/pokedex_logo.png')"
-            max-height="56"
-            max-width="200"
-            contain
-          ></v-img>
-        </router-link>
-      </div>
-      <v-spacer></v-spacer>
-      <retro-button></retro-button>
-      <search-menu></search-menu>
-      <lang-menu></lang-menu>
-    </v-app-bar>
-  </div>
+  <v-app-bar
+    :class="[$vuetify.breakpoint.smAndDown ? 'px-2' : 'px-8']"
+    app
+    color="red"
+  >
+    <router-link :to="{ name: 'pokedex' }">
+      <v-img
+        :src="require('@/assets/pokedex_logo.png')"
+        :max-height="[$vuetify.breakpoint.smAndDown ? '48' : '56']"
+        max-width="180"
+        contain
+      ></v-img>
+    </router-link>
+    <v-spacer></v-spacer>
+    <retro-button></retro-button>
+    <search-menu></search-menu>
+    <lang-menu></lang-menu>
+  </v-app-bar>
 </template>
 
 <script lang="ts">
@@ -29,8 +29,12 @@ import RetroButton from "@/components/RetroButton.vue";
   components: {
     SearchMenu,
     LangMenu,
-    RetroButton
-  }
+    RetroButton,
+  },
 })
 export default class NavBar extends Vue {}
 </script>
+
+<style lang="sass">
+@import '~vuetify/src/styles/styles.sass'
+</style>

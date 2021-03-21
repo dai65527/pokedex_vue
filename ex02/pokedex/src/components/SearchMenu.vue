@@ -8,7 +8,9 @@
         v-bind="attrs"
         v-on="on"
       >
-        Search
+        <span v-if="$vuetify.breakpoint.mdAndUp" class="mr-1">
+          Search
+        </span>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </template>
