@@ -8,8 +8,10 @@
         v-bind="attrs"
         v-on="on"
       >
-        {{ langDisplayName }}
-        <v-icon>mdi-menu-down</v-icon>
+        <span v-if="$vuetify.breakpoint.mdAndUp" class="mr-1">
+          {{ langDisplayName }}
+        </span>
+        <v-icon dense>mdi-earth</v-icon>
       </v-btn>
     </template>
     <v-list>

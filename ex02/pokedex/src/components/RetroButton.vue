@@ -7,7 +7,10 @@
       rounded
       :to="{ name: 'pokemonRetro', params: { id: this.$route.params.id } }"
     >
-      Retro
+      <span v-if="$vuetify.breakpoint.mdAndUp" class="mr-1">
+        Retro
+      </span>
+      <v-icon dense>mdi-clock-outline</v-icon>
     </v-btn>
     <v-btn
       v-if="isDisplayModernBtn"
@@ -16,7 +19,10 @@
       rounded
       :to="{ name: 'pokemon', params: { id: this.$route.params.id } }"
     >
-      Modern
+      <span v-if="$vuetify.breakpoint.mdAndUp" class="mr-1">
+        Modern
+      </span>
+      <v-icon dense>mdi-clock-outline</v-icon>
     </v-btn>
   </div>
 </template>
@@ -26,7 +32,7 @@ import { Component, Vue } from "vue-property-decorator";
 import { POKERETRO_MAX } from "@/models/pokeRetro.ts";
 
 @Component({
-  components: {}
+  components: {},
 })
 export default class RetroButton extends Vue {
   get isDisplayRetroBtn(): boolean {
