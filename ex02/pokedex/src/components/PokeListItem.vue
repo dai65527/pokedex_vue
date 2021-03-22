@@ -6,7 +6,7 @@
       :to="{ name: 'pokemon', params: { id: pokemon.id } }"
       class="mx-auto"
     >
-      <v-img src="/pokeball_bg.png" :alt="pokemon.name">
+      <v-img :src="require('@/assets/pokeball_bg.png')" :alt="pokemon.name">
         <v-img :src="pokemon.imageUrl" :alt="pokemon.name"> </v-img>
       </v-img>
       <p v-if="$vuetify.breakpoint.xs" class="font-weight-bold body-1 py-3 mx-3 grey--text text--darken-2">
