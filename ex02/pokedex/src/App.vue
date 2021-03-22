@@ -23,5 +23,6 @@ export default {
 <style scoped>
 .poke_comp_bg {
   background-image: url("~@/assets/pokemon_comp_bg.png");
+  background-repeat: repeat;
 }
 </style>
